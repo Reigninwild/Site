@@ -37,4 +37,19 @@ public class MaterialsService implements IMaterialsService{
         return materialsDao.getMaterials();
     }
 
+    public Materials getMaterial(int materialID) {
+        // TODO Auto-generated method stub
+        return materialsDao.getMaterial(materialID);
+    }
+
+    public List<Materials> getEmptyMaterials() {
+        // TODO Auto-generated method stub
+        return materialsDao.getEmptyMaterials();
+    }
+
+    public List<Materials> getMaterialsByType(String type) {
+        // TODO Auto-generated method stub
+        return materialsDao.getMaterialsByType(type);
+    }
+
 }

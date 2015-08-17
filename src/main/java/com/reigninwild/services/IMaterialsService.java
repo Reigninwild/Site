@@ -11,5 +11,12 @@ public interface IMaterialsService {
 
     public void updateMaterial(Materials materials);
 
+    
+    public Materials getMaterial(int materialID);
+    
     public List<Materials> getAllMaterials();
+    
+    public List<Materials> getEmptyMaterials();
+    
+    public List<Materials> getMaterialsByType(String type);
 }

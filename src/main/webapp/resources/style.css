@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
  body{
-background-color:white;
+background-color:#f2f3ea;
   padding:0;
    margin:0;
    width: 100%;
@@ -286,6 +286,40 @@ position:relative;
 background-repeat:no-repeat;
  }
  
+ #select{
+ display:none;
+ }
+ 
+ /*---------------items---------------*/
+ 
+   #items{
+background-color:#9aaa9f;
+width:100%;
+height:100%;
+background-size: 100%;
+
+ }
+ 
+ .item_img{
+ width:80px;
+ height:80px;
+ background-size:cover;
+ float:left;
+ overflow:hidden;
+ }
+ 
+ .item_name{
+ text-align:center;
+font-size:18px;
+
+ }
+ 
+ .item_desc{
+font-size:14px;
+ float:left;
+ text-align:left;
+ margin-left:60px;
+ }
  
 /* ---------- Adaptive --------- */
  

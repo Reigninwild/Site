@@ -1,7 +1,7 @@
 package com.reigninwild.dao;
 
 import java.util.List;
-import java.util.Set;
+
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -25,6 +25,14 @@ public class CraftsDao extends HibernateDaoSupport implements ICraftsDao {
     @SuppressWarnings("unchecked")
     public List<Crafts> getCrafts() {
         List<Crafts> crafts =  getHibernateTemplate().find("from Crafts");
+        return crafts;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Crafts> getCraft(int craftID) {
+        List<Crafts> crafts = getHibernateTemplate().find("from Crafts c where c.item.materialID = "+craftID+"");
+
+
         return crafts;
     }
 

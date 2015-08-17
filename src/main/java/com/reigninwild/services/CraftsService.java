@@ -45,4 +45,10 @@ public class CraftsService implements ICraftsService{
         return craftssDao.getCrafts();
     }
 
+    public List<Crafts> getCraft(int craftID) {
+        // TODO Auto-generated method stub
+        return craftssDao.getCraft(craftID);
+    }
+
+  
 }

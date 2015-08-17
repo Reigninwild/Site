@@ -24,8 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.reigninwild.orm.Crafts;
+import com.reigninwild.orm.Materials;
 import com.reigninwild.orm.News;
 import com.reigninwild.orm.Users;
+import com.reigninwild.services.ICraftsService;
+import com.reigninwild.services.IMaterialsService;
 import com.reigninwild.services.INewsService;
 import com.reigninwild.services.IUsersService;
 
@@ -37,6 +41,12 @@ public class MainController {
     
     @Autowired
     private INewsService newsService;
+    
+    @Autowired
+    private IMaterialsService materialsService;
+    
+    @Autowired
+    private ICraftsService craftsService;
     
     // for logging
     private static final Logger LOG = Logger.getLogger(MainController.class.getName());
@@ -60,12 +70,47 @@ public class MainController {
     public String news(RedirectAttributes attributes) {
         return "news";
     }
+    
+    @RequestMapping("/addmaterial")
+    public String addmaterial(RedirectAttributes attributes) {
+        return "addmaterial";
+    }
+    
+    @RequestMapping("/addcraft")
+    public String addcraft(RedirectAttributes attributes) {
+        return "addcraft";
+    }
+    
+    @RequestMapping("/items")
+    public String items(RedirectAttributes attributes) {
+        return "items";
+    }
 
 
     
     @ModelAttribute("news")
     public News createNews() {
         return new News();
+    }
+    
+    @ModelAttribute("material")
+    public Materials createMaterial() {
+        return new Materials();
+    }
+    
+    @ModelAttribute("materials")
+    public List<Materials> allMaterials() {
+        return materialsService.getAllMaterials();
+    }
+    
+    @ModelAttribute("emptyMaterials")
+    public List<Materials> allEmptyMaterials() {
+        return materialsService.getEmptyMaterials();
+    }
+    
+    @ModelAttribute("craft")
+    public Crafts createCraft() {
+        return new Crafts();
     }
     
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
@@ -84,7 +129,7 @@ public class MainController {
         return "redirect:/login";
     }
     
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/addnew", method = RequestMethod.POST)
     public String addNews(@ModelAttribute("news") News news, BindingResult result,
             RedirectAttributes attributes, HttpServletRequest request) {
         // ROLE_USER - default group for new users
@@ -109,6 +154,43 @@ public class MainController {
         return "redirect:/index";
     }
     
+    @RequestMapping(value = "/addmaterial", method = RequestMethod.POST)
+    public String addMaterial(@ModelAttribute("material") Materials material, BindingResult result,
+            RedirectAttributes attributes, HttpServletRequest request) {
+         
+        try {
+            materialsService.saveMaterial(material);
+
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+            return "redirect:/index#register";
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+            return "redirect:/index#register";
+        }
+
+        return "addmaterial";
+    }
+    
+    /*
+    @RequestMapping(value = "/addcraft", method = RequestMethod.POST)
+    public String addcraft(@ModelAttribute("craft") Crafts craft, BindingResult result,
+            RedirectAttributes attributes, HttpServletRequest request) {
+         
+        try {
+            craftsService.saveCraft(craft);
+
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+            return "redirect:/index#register";
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+            return "redirect:/index#register";
+        }
+
+        return "addcraft";
+    }
+    */
     
     
     
@@ -147,6 +229,38 @@ public class MainController {
     }
     
     
+    //get materials by type
+    @RequestMapping(value = "/getmaterialstype", method = RequestMethod.GET)
+    public @ResponseBody List<Materials> getMaterialsType(final HttpServletRequest request,@RequestParam("type") String type) {
+
+        List<Materials> materials = new ArrayList<Materials>();
+        try {
+           materials = materialsService.getMaterialsByType(type);
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+        }
+        return materials;
+    }
+    
+    
+    
+    //get materials by type
+    @RequestMapping(value = "/getmaterialscraft", method = RequestMethod.GET)
+    public @ResponseBody List<Crafts> getMaterialsCraft(final HttpServletRequest request,@RequestParam("id") int id) {
+
+        List<Crafts> crafts = new ArrayList<Crafts>();
+        try {
+            crafts = craftsService.getCraft(id);
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+        }
+        return crafts;
+    }
+    
     
     @RequestMapping(value = "news{id}", method = RequestMethod.GET)
     public String showFullNews(@PathVariable("id") int id, Model model) {
@@ -156,6 +270,36 @@ public class MainController {
         model.addAttribute("news",news);
         
         return "targetnews";
+    }
+    
+    //select last count news
+    @RequestMapping(value = "/savecraft", method = RequestMethod.GET)
+    public @ResponseBody String saveCraft(final HttpServletRequest request,@RequestParam("craft_id") int craftID,@RequestParam("material_id") int materialID,@RequestParam("count") int count) {
+
+      Crafts craft = new Crafts();
+      Materials material = new Materials();
+      Materials item = new Materials();
+      
+      
+        try {
+            
+            item = materialsService.getMaterial(craftID);
+            material = materialsService.getMaterial(materialID);
+
+            
+            craft.setItem(item);
+            craft.setMaterial(material);
+            craft.setMaterialCount(count);
+            
+            craftsService.saveCraft(craft);
+            
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+        }
+
+        return "1";
     }
     
     

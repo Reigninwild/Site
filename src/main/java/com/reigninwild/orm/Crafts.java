@@ -30,12 +30,12 @@ public class Crafts implements Serializable {
     
     // many crafts - one item
     @ManyToOne(targetEntity = Materials.class)
-    @JoinColumn(name = "material_id1")
+    @JoinColumn(name = "item_id")
     private Materials item;
 
     // many craft - one material
     @ManyToOne(targetEntity = Materials.class)
-    @JoinColumn(name = "material_id2")
+    @JoinColumn(name = "material_id")
     private Materials material;
 
 
@@ -46,6 +46,9 @@ public class Crafts implements Serializable {
     /*------------*/
     @Column(name = "item_desc", nullable = true, length = 200)
     private String itemDesc;
+    /*------------*/
+    @Column(name = "item_desc_ru", nullable = true, length = 200)
+    private String itemDescRU;
     
     public int getMaterialCount() {
         return materialCount;

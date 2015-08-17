@@ -8,72 +8,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Reign in wild: add news</title>
+<title>Reign in wild: add materials</title>
 
 <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>
-
-
-
-<script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
-
-<script>tinymce.init({selector:'textarea',
-	plugins: "image",
-
-	
-	     
-	        
-});
-
-
-$(document).ready(function(){
-    
-	  $('#myTable').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:4});
-	    
-	});
-</script>
-
-
 </head>
 <body>
 
-<div class="container">
 
+<form:form method="post" action="addmaterial" commandName="material" id="add_materials" >
 
-
-<form:form method="post" action="addnew" commandName="news" id="add_news" >
-ENG
-            <table width="100%">
+         
               
-             
-              <tr> 
-              
-                    <form:textarea path="newsText" rows="5" cols="30" width="100%"/>
-              </tr>
-
-            </table>
-            RU
-              <table width="100%">
-              
-             
-              <tr> 
-              
-                    <form:textarea path="newsTextRU" rows="5" cols="30" width="100%"/>
-              </tr>
-
-            </table>
+                    <form:input path="materialName" width="100%" value="Material name" size="100px"/>
+                    <br>
+                    <form:input path="materialNameRU" width="100%" value="Material name(ru)" size="100px"/>
+                    <form:input path="materialType" width="100%" value="Material type" size="100px"/>
+                    <form:input path="materialDesc" width="100%" value="Material desc" size="100px"/>
+                    <form:input path="materialDescRU" width="100%" value="Material desc(ru)" size="100px"/>
+                    <form:input path="materialPic" width="100%" value="picture" size="100px"/>
+                    <form:input path="materialStatus" width="100%" value="status" size="100px"/>
+          
+          
           
               <input type="submit" value="Submit">
 </form:form>
 
-</div>
-
-
-
 </body>
 </html>
-
-

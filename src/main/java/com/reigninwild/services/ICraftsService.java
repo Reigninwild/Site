@@ -14,4 +14,6 @@ public interface ICraftsService {
     public void updateCraft(Crafts craft);
 
     public List<Crafts> getAllCrafts();
+    
+    public List<Crafts> getCraft(int craftID);
 }

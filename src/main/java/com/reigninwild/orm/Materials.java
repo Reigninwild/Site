@@ -20,18 +20,27 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
     public class Materials implements Serializable {
         private static final long serialVersionUID = 1L;
         /*----private key---*/
-        @Id
-        @Column(name = "material_id")
-        @GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
-        @SequenceGenerator(name = "my_entity_seq_gen", sequenceName = "catalog_seq")
+       @Id
+       @Column(name = "material_id")
+       @GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
+       @SequenceGenerator(name = "my_entity_seq_gen", sequenceName = "catalog_seq")
         private int materialID;
 
         /*------------*/
         @Column(name = "material_desc", nullable = true, length = 200)
         private String materialDesc;
         /*------------*/
+        @Column(name = "material_desc_ru", nullable = true, length = 200)
+        private String materialDescRU;
+        /*------------*/
         @Column(name = "material_name", nullable = false, length = 30)
         private String materialName;
+        /*------------*/
+        @Column(name = "material_name_ru", nullable = false, length = 30)
+        private String materialNameRU;
+        /*------------*/
+        @Column(name = "material_status", length = 10)
+        private String materialStatus;
         /*------------*/
         @Column(name = "material_pic", nullable = true, length = 100)
         private String materialPic;
@@ -77,6 +86,46 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
         public void setMaterialType(String materialType) {
             this.materialType = materialType;
+        }
+
+
+        public String getMaterialDescRU() {
+            return materialDescRU;
+        }
+
+
+        public void setMaterialDescRU(String materialDescRU) {
+            this.materialDescRU = materialDescRU;
+        }
+
+
+        public String getMaterialNameRU() {
+            return materialNameRU;
+        }
+
+
+        public void setMaterialNameRU(String materialNameRU) {
+            this.materialNameRU = materialNameRU;
+        }
+
+
+        public String getMaterialStatus() {
+            return materialStatus;
+        }
+
+
+        public void setMaterialStatus(String materialStatus) {
+            this.materialStatus = materialStatus;
+        }
+
+
+        public int getMaterialID() {
+            return materialID;
+        }
+
+
+        public void setMaterialID(int materialID) {
+            this.materialID = materialID;
         }
         
     }

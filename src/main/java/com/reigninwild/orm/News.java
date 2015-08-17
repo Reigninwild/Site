@@ -34,6 +34,9 @@ public class News implements Serializable {
     @Column(name = "news_text", nullable = true, length = 1000)
     private String newsText;
     /*------------*/
+    @Column(name = "news_text_ru", nullable = true, length = 1000)
+    private String newsTextRU;
+    /*------------*/
     @Column(name = "news_date", nullable = false)
     private Date newsDate;
     /*------------*/
@@ -74,6 +77,14 @@ public class News implements Serializable {
 
     public void setUuser(Users uuser) {
         this.uuser = uuser;
+    }
+
+    public String getNewsTextRU() {
+        return newsTextRU;
+    }
+
+    public void setNewsTextRU(String newsTextRU) {
+        this.newsTextRU = newsTextRU;
     }
 
 

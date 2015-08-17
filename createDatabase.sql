@@ -19,8 +19,11 @@ create table materials(
 material_id int not null primary key AUTO_INCREMENT,
 material_type varchar(20),
 material_desc varchar(200),
-marerial_name varchar(30) not null,
-material_pic varchar(100)
+material_desc_ru varchar(200),
+material_name varchar(30) not null,
+material_name_ru varchar(30) not null,
+material_pic varchar(100),
+material_status varchar(10)
 );
 
 create table crafts(
@@ -28,7 +31,6 @@ craft_id int not null primary key AUTO_INCREMENT,
 item_id int not null,
 material_id int not null,
 material_count int,
-item_desc varchar(200),
 constraint fk_item_id foreign key (item_id) references materials(material_id) on delete cascade,
 constraint fk_material_id foreign key (material_id) references materials(material_id) on delete cascade
 );
@@ -36,6 +38,7 @@ constraint fk_material_id foreign key (material_id) references materials(materia
 create table news(
 news_id int not null primary key AUTO_INCREMENT,
 news_text varchar(10000),
+news_text_ru varchar(10000),
 news_date date not null,
 news_author int,
 constraint fk_news_author foreign key (news_author) references users(user_id) on delete cascade

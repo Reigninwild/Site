@@ -3,6 +3,7 @@ package com.reigninwild.dao;
 import java.util.List;
 
 
+
 import com.reigninwild.orm.Materials;
 
 public interface IMaterialsDao {
@@ -23,4 +24,10 @@ public interface IMaterialsDao {
      */
     
     public List<Materials> getMaterials();
+    
+    public Materials getMaterial(int materialID);
+
+    public List<Materials> getEmptyMaterials();
+    
+    public List<Materials> getMaterialsByType(String type);
 }

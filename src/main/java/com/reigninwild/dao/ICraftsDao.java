@@ -22,5 +22,8 @@ public interface ICraftsDao {
      * @return all craft
      */
     
+    public List<Crafts> getCraft(int craftID);
+
+    
     public List<Crafts> getCrafts();
 }
