@@ -12,6 +12,8 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
     <http auto-config="true">
         <intercept-url pattern="/secure/**" access="ROLE_USER" />
  		<intercept-url pattern="/addnews/**" access="ROLE_ADMIN" />
+ 		<intercept-url pattern="/addmaterial/**" access="ROLE_ADMIN" />
+ 		<intercept-url pattern="/addcraft/**" access="ROLE_ADMIN" />
         <intercept-url pattern="/index" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <form-login login-page="/login"
             authentication-failure-url="/signin-failure" default-target-url="/signin" />

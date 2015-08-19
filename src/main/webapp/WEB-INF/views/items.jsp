@@ -29,25 +29,59 @@
 <div id="items">
 	<div class="materials_types">
 		<div class="material_types" onclick="showMaterialsType('resources')">
-		Resoures
+			<div class="row">
+				<div class="col-xs-2">
+					<div class="type_resources"></div>
+	     		</div>
+	     
+	     		<div class="col-xs-8">
+				<div class="type_name">Resources</div>
+	    		 </div>
+	    	 </div>
 		</div>
+		
+		<div class="material_types" onclick="showMaterialsType('weapons')">
+			<div class="row">
+				<div class="col-xs-2">
+					<div class="type_weapons"></div>
+	     		</div>
+	     
+	     		<div class="col-xs-8">
+				<div class="type_name">Weapons</div>
+	    		 </div>
+	    	 </div>
+		</div>
+		
+		<div class="material_types" onclick="showMaterialsType('buildings')">
+			<div class="row">
+				<div class="col-xs-2">
+					<div class="type_buildings"></div>
+	     		</div>
+	     
+	     		<div class="col-xs-8">
+				<div class="type_name">Buildings</div>
+	    		 </div>
+	    	 </div>
+		</div>
+		
+		<div class="material_types" onclick="showMaterialsType('other')">
+			<div class="row">
+				<div class="col-xs-2">
+					<div class="type_resources"></div>
+	     		</div>
+	     
+	     		<div class="col-xs-8">
+				<div class="type_name">Other</div>
+	    		 </div>
+	    	 </div>
+		</div>
+		
 
-		<div class="materials_types" onclick="showMaterialsType('weapons')">
-		Weapons
-		</div>
-
-		<div class="materials_types" onclick="showMaterialsType('buildings')">
-		Buildings
-		</div>
-
-		<div class="materials_types" onclick="showMaterialsType('other')">
-		Other
-		</div>
 
 	</div>
 
 	<div class="materials_list">
-	
+	<div class="item_back" onclick='backitems()'><div class="back">Back</div></div>
 
 	
 

@@ -17,8 +17,8 @@
 <div class="menu_item"><div class="about_i"></div>About</div>
 <div class="menu_item" onclick=""><div class="news_i" onclick="toNews()"></div>News</div>
 <div class="menu_item"><div class="screenshots_i"></div>Screenshots</div>
-<div class="menu_item"><div class="guides_i"></div>Guides</div>
-<div class="menu_item"><div class="contacts_i"></div>Contacts</div>
+<div class="menu_item"><div class="guides_i" onclick="location.href = '${pageContext.request.contextPath}/items';"></div>Guides</div>
+<div class="menu_item"><div class="contacts_i" onclick="location.href = '${pageContext.request.contextPath}/contacts';"></div>Contacts</div>
 
 	</div>
 

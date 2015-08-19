@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -48,6 +49,9 @@ public class MainController {
     @Autowired
     private ICraftsService craftsService;
     
+    @Autowired
+    ServletContext context;
+    
     // for logging
     private static final Logger LOG = Logger.getLogger(MainController.class.getName());
     
@@ -84,6 +88,11 @@ public class MainController {
     @RequestMapping("/items")
     public String items(RedirectAttributes attributes) {
         return "items";
+    }
+    
+    @RequestMapping("/contacts")
+    public String contacts(RedirectAttributes attributes) {
+        return "contacts";
     }
 
 
@@ -301,6 +310,29 @@ public class MainController {
 
         return "1";
     }
+
+    //send email
+    @RequestMapping(value = "/sendemail", method = RequestMethod.GET)
+    public @ResponseBody String sendEmail(final HttpServletRequest request,@RequestParam("subject") String subject,@RequestParam("content") String content) {
+
+        String host = context.getInitParameter("host");
+        String  port = context.getInitParameter("port");
+        String user = context.getInitParameter("user");
+        String pass = context.getInitParameter("pass");
+        
+        String result = "0";
+        try {
+            EmailUtility.sendEmail(host, port, user, pass, "reigninwild@gmail.com", subject,
+                    content);
+            result="1";
+        } catch (Exception ex) {
+            result="0";
+        }
+      
+        return result;
+    }
+    
+    
     
     
 }

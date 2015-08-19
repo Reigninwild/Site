@@ -1,4 +1,4 @@
-var url = "http://localhost:8080/reigninwildWebApp";
+var url = "http://app-reigninwild.rhcloud.com/reign";
 
 function show_more() {
 
@@ -195,6 +195,7 @@ function addCraftMaterial(craft_id,material_id,count){
 function showMaterialsType(type){
 	
 	$(".materials_types").css("display","none");
+	$(".materials_list").css("display","block");
 	//$(".materials_list").children().remove();
 	
 	$.ajax({
@@ -215,6 +216,12 @@ function showMaterialsType(type){
 		}
 	});
 }
+
+function backitems(){
+	$(".materials_types").css("display","block");
+	$(".materials_list").css("display","none");	
+}
+
 
 function getCraftMaterials(id){
 
@@ -237,6 +244,10 @@ function getCraftMaterials(id){
 }
 
 function drawMaterials(data) {
+	$(".item_record").remove();
+	$(".show_sub_button").remove();
+
+	
 	for (var i = 0; i < data.length; i++) {
 		drawMaterial(data[i]);
 	}
@@ -245,24 +256,82 @@ function drawMaterial(rowData) {
 	//var row = $("<div class='container'><div class='item_img'><img src='"+ctx+"/resources/images/materials/"+rowData.materialPic+"' /> </div><div class='item_name'>"+rowData.materialName+"</div><div class='item_desc'>"+rowData.materialDesc+"</div></div>");
 
 	//var row = $("<tr> <td width='80px'></td> <td> <table><tr><td></td></tr> <tr><td><div class='item_desc'>"+rowData.materialDesc+"</div></td></tr></table> </td> </tr>");
-	var row = $("<div class='row' id='"+rowData.materialID+"'> <div class='col-xs-2'><div class='item_img'><img src='"+ctx+"/resources/images/materials/"+rowData.materialPic+"' /> </div> </div><div class='col-xs-10'><div class='row'><div class='col-xs-12'><div class='item_name'>"+rowData.materialName+"</div></div></div><div class='row'><div class='col-xs-12'><div class='item_desc'>"+rowData.materialDesc+"</div></div></div> </div>");
+	var row = $("<div class='item_record' id='"+rowData.materialID+"'><div class='row'><div class='col-xs-8'><div class='item_name'>"+rowData.materialName+"</div></div></div> <div class='row' > <div class='col-xs-2'><img class='item-img' height='70' width='70' src='"+ctx+"/resources/images/materials/"+rowData.materialPic+"' /> </div><div class='col-xs-10'><div class='item_desc'>"+rowData.materialDesc+"</div> </div></div></div>");
 	
 	$(".materials_list").append(row);
+	
+	$(".materials_list").append($("<div class='show_sub_button' onclick='show_sub_items("+rowData.materialID+")'><div class='show_sub'></div></div>"));
 	
 	//get materials to craft this item
 	getCraftMaterials(rowData.materialID);
 	
 
 }
+function show_sub_items(id){
+	if ($("#sub_item"+id+"").css("display")=="none"){
+		$("#sub_item"+id+"").css("display","block");
+	} else{
+		$("#sub_item"+id+"").css("display","none");
+	}
+	
+}
 
 function drawCraftMaterials(data){
+	var block = $("<div class='sub_items' id ='sub_item"+data[0].item.materialID+"'></div>");
+	$("#"+data[0].item.materialID+"").append(block);
 	for (var i = 0; i < data.length; i++) {
 		drawCraftMaterialsItems(data[i]);
+		
 	}
+	$("#"+data[0].item.materialID+"").append($("<div class='row'></div>"));
+	
+	
+	//var outer = $("<div class=''></div>");
 }
 
 function drawCraftMaterialsItems(rowData){
-	var row = $("<div class='col-xs-3'>"+rowData.material.materialName+"<div class='item_img'><img src='"+ctx+"/resources/images/materials/"+rowData.material.materialPic+"' /> </div> </div>");
-	$("#"+rowData.item.materialID+"").append(row);
+	var row = $("<div class='row'><div class='col-xs-12'><div class='item_small_name'><img height='60' width='60' src='"+ctx+"/resources/images/materials/"+rowData.material.materialPic+"' />"+rowData.material.materialName+"</div><div class='item_count'> x"+rowData.materialCount+"</div> </div></div>");
+	
+	
+	
+	$("#sub_item"+rowData.item.materialID+"").append(row);
+	
+}
+
+function send_report(){
+	var subject = $("#subject").val();
+	var content = $("#content").val();
+	
+	if (subject.length < 4) {
+		document.getElementById('parent_popup3').style.display='block';
+	} else if (content.length < 10){
+		document.getElementById('parent_popup4').style.display='block';
+	} else {
+		$.ajax({
+			type : 'GET',
+			url : url + '/sendemail',
+			dataType : "json",
+			data : {
+				'content' : content,
+				'subject' : subject
+			},
+			contentType : 'application/json',
+			cache : false,
+			success : function(data) {
+				document.getElementById('parent_popup').style.display='block';
+				$("#subject").val("");
+				$("#content").val("");
+			},
+			error : function(XmlHttpRequest, textStatus, errorThrown) {
+				document.getElementById('parent_popup2').style.display='block';
+			}
+		});
+	}
+	
+	
+	
+
+
+
 }
 

@@ -31,6 +31,8 @@ craft_id int not null primary key AUTO_INCREMENT,
 item_id int not null,
 material_id int not null,
 material_count int,
+item_desc varchar(200),
+item_desc_ru varchar(200),
 constraint fk_item_id foreign key (item_id) references materials(material_id) on delete cascade,
 constraint fk_material_id foreign key (material_id) references materials(material_id) on delete cascade
 );
