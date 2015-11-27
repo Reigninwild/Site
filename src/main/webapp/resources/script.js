@@ -1,4 +1,6 @@
-var url = "http://app-reigninwild.rhcloud.com/reign";
+//var url = "http://app-reigninwild.rhcloud.com/reign";
+
+var url = "http://localhost:8080/reigninwildWebApp";
 
 function show_more() {
 
@@ -70,33 +72,101 @@ function show_more() {
 	}
 }
 
-var newsCount=0;
 
-/* get picks */
-function getNews(number) {
+function subscribe(){
+	
 
-	var count=0;
-	if (number == 'newsCount') {
-		count = newsCount+1;
-	} else{
-		count = number;
-	}
+	var email = $("#nlt_email").val();
+	if (validateEmail(email) == 1) {
+		$("#email_error").text("Incorrect email");
+		$("#email_error").css("color","red");
+		$("#email_error").css("display","block");
+	} else {
 
 	$.ajax({
 		type : 'get',
-		url : url + '/getnews',
-		dataType : "json",
+		url : url + '/subscribe',
 		data : {
-			'count' : count
+			'email' : email
 		},
+		dataType : "json",
 		contentType : 'application/json',
 		cache : false,
 		success : function(data) {
-			drawNews(data);
-			newsCount=newsCount+data.length;
+			console.log(data);
+			if (data == 0) {
+				$("#email_error").text("You are already subscribed to updates");
+				$("#email_error").css("color","red");
+				$("#email_error").css("display","block");
+			} else if (data == 1){
+				$("#email_error").text("You are successfully subscribed to updates");
+				$("#email_error").css("color","#c2a67f");
+				$("#email_error").css("display","block");
+			}
 			
-			if (data.length==0) $("#more_news").css('display','none');
-			// alert(data);
+		},
+		error : function(XmlHttpRequest, textStatus, errorThrown) {
+
+			// alert("standings error= " + XmlHttpRequest.responseText);
+
+		}
+	});
+	}
+}
+
+function validateEmail(email) {
+	/*
+	 * checking email/ Email must have @, dot . after @, and at least 2 sumbols
+	 * after @
+	 */
+	var result = 0;
+	var atpos = email.indexOf("@");
+	var dotpos = email.lastIndexOf(".");
+	if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length || email.length < 6) {
+	result =1 ;
+	} 
+return result;
+}
+
+
+/* get news */
+function getLastNews() {
+
+	$.ajax({
+		type : 'get',
+		url : url + '/getlast',
+		dataType : "json",
+		contentType : 'application/json',
+		cache : false,
+		success : function(data) {
+			$("#news").html("");
+			drawNewsItem(data);
+			
+		},
+		error : function(XmlHttpRequest, textStatus, errorThrown) {
+
+			// alert("standings error= " + XmlHttpRequest.responseText);
+
+		}
+	});
+}
+
+var newsCount=0;
+
+/* get news */
+function getAllNews() {
+
+
+	$.ajax({
+		type : 'get',
+		url : url + '/getallnews',
+		dataType : "json",
+		contentType : 'application/json',
+		cache : false,
+		success : function(data) {
+		
+			drawNews(data);
+	
 		},
 		error : function(XmlHttpRequest, textStatus, errorThrown) {
 
@@ -107,19 +177,23 @@ function getNews(number) {
 }
 
 function drawNews(data) {
-	for (var i = 0; i < data.length; i++) {
-		drawNewsItem(data[i], i + 1);
+	for (var i = data.length-1; i > -1; i--) {
+		drawNewsItem(data[i]);
 	}
 }
 function drawNewsItem(rowData) {
+	
 	var date = new Date(rowData.newsDate);
-	var row = $("<div class='container'><div id='news_block'><div id='news_text'>"
+	var row = $("<div id='news_title'>"+rowData.newsTitle+"</div><div id='news_text'>"
 					+ rowData.newsText
-					+ "</div><div id='rline' onclick='fullnews("+rowData.newsID+","+JSON.stringify(rowData.newsText)+")'><div id='read_more'>Read more</div></div><div id='news_date'>"
+					+ "</div><div id='news_date'><div class='glyphicon glyphicon-calendar'></div>"
 					+ date.getDate()+"-"+(date.getMonth()+1) +"-"+date.getFullYear()
 					+ "</div><div id='news_author'><div class='glyphicon glyphicon-user'></div>"
-					+ rowData.uuser.username + "</div></div></div> ");
+					+ rowData.uuser.username + "</div> ");
 	$("#news").append(row);
+	
+	var line = $("<div class='bot_line'></div>");
+	$("#news").append(line);
 	
 	
 }

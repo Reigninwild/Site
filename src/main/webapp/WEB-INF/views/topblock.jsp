@@ -3,27 +3,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 
 <body>
-<div id="main_top_block">
-<div id="main_top_left">
+<div class="wrapper">
 
-<div id="more_button" onclick="show_more()"><div id="more"></div></div>
-  
-<div id="logo" onclick="location.href = '${pageContext.request.contextPath}/';" title="reigninwild.com"></div> 
-<div class="main_top_left">
-
-<div class="menu_item"><div class="about_i"></div>About</div>
-<div class="menu_item" onclick=""><div class="news_i" onclick="toNews()"></div>News</div>
-<div class="menu_item"><div class="screenshots_i"></div>Screenshots</div>
-<div class="menu_item"><div class="guides_i" onclick="location.href = '${pageContext.request.contextPath}/items';"></div>Guides</div>
-<div class="menu_item"><div class="contacts_i" onclick="location.href = '${pageContext.request.contextPath}/contacts';"></div>Contacts</div>
-
-	</div>
-
-
-</div>
+    <!-- ################################################################################################ -->
+   
+    <nav id="mainav" class="fl">
+      <ul class="clear">
+        <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+        <li><a href="${pageContext.request.contextPath}/news">News</a></li>
+         <li><a href="${pageContext.request.contextPath}/videos">Videos</a></li>
+        <li><a href="${pageContext.request.contextPath}/gallary">Screenshots</a></li>
+        <li><a href="${pageContext.request.contextPath}/contacts">Contacts</a></li>
+ 
+    </nav>
+    <!-- ################################################################################################ --> 
 
 </div>
 </body>

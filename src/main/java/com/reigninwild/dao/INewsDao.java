@@ -18,4 +18,6 @@ public interface INewsDao {
     public List<News> getNews();
 
     public List<News> getNewCount(int count);
+    
+    public News getLast();
 }

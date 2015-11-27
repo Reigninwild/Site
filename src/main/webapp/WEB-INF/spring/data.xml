@@ -74,6 +74,9 @@
      <bean id="CraftsDao" class="com.reigninwild.dao.CraftsDao">
        <property name="sessionFactory" ref="sessionFactory" />
      </bean>
+      <bean id="EmailsDao" class="com.reigninwild.dao.EmailsDao">
+       <property name="sessionFactory" ref="sessionFactory" />
+     </bean>
      
   
      
@@ -92,6 +95,9 @@
     </bean>
      <bean id="CraftsService" class="com.reigninwild.services.CraftsService">
        <property name="dao" ref="CraftsDao" />
+    </bean>
+     <bean id="EmailsService" class="com.reigninwild.services.EmailsService">
+       <property name="dao" ref="EmailsDao" />
     </bean>
     
     

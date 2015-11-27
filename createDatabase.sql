@@ -40,6 +40,7 @@ constraint fk_material_id foreign key (material_id) references materials(materia
 create table news(
 news_id int not null primary key AUTO_INCREMENT,
 news_text varchar(10000),
+news_title varchar(200),
 news_text_ru varchar(10000),
 news_date date not null,
 news_author int,
@@ -55,7 +56,10 @@ guide_author int,
 constraint fk_news_author2 foreign key (guide_author) references users(user_id) on delete cascade
 );
 
+create table emails(
+email_id int not null primary key AUTO_INCREMENT,
+email varchar(30) unique
+);
+
 
   insert into users (user_id,username,password,email,user_group) values (1,'administrator','20142014','reigninwild@gmail.com','ROLE_ADMIN');
-
- 

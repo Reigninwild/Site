@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Reign in wild: contacts</title>
+<title>Reign in wild: Contacts</title>
 <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -22,31 +22,37 @@
 
 <%@include  file="topblock.jsp" %>
 
-	<div class="container">
+<div class="wrapper"> 
+	
 		<div class="email_block">
-			<div class="email">Email: reigninwild@gmail.com </div>
+		<div class="email">Our contacts:</div>
+			<div class="email">Email: <a>reigninwild@gmail.com </a></div>
+			<div class="email">VK:<a href="loh.com">loh.com</a></div>
+			<div class="email">Facebook:<a href="loh.com">loh.com</a></div>
 			
 			
-			<div class="rep_title">Report a bug</div>
+			<div class="email">Tell us about found bugs and your suggestions for improving game world and game in general (Don't forget to leave your email).</div>
 			<div class="row">
 				<div class="col-xs-2">
 				 <div class="rep_label">Subject</div>
 				</div>
 				<div class="col-xs-10">
-				 <input type="text" id="subject" size="30"/>
+				 <input type="text" id="subject" size="20"/>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-xs-2">
-				 <div class="rep_label"> Bug </div>
+				 <div class="rep_label"> Message </div>
 				</div>
 				<div class="col-xs-10">
-				<textarea rows="10" cols="39" id="content"></textarea>
+				<textarea rows="10" cols="20" id="content"></textarea>
+				<div class="send_button" onclick="send_report()">Send message</div>
 				</div>
+				
 			</div>
+		
 			
-			<div class="send_button" onclick="send_report()">Send report</div>
 			
 		</div>
 		
@@ -80,11 +86,21 @@
 			</div>
 
 		
+	
+	
+	
 	</div>
 	
-	
-	
+<!-- ################################################################################################ -->
+<div class="wrapper row5">
+  <div id="copyright" class="clear"> 
 
+    <p class="fl_left"> &copy; <a href="${pageContext.request.contextPath}/home">Reigninwild.com</a>, 2015</p>
+
+  </div>
+</div>
+<div class="wrapper row0"><footer id="footer" class="clear"></footer></div>
+<!-- ################################################################################################ --> 
 
 
 	

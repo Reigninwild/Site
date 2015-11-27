@@ -50,7 +50,7 @@ ENG
               
              
               <tr> 
-              
+              		<label>Title:</label><form:input path="newsTitle" rows="1" cols="30" width="100%"/>
                     <form:textarea path="newsText" rows="5" cols="30" width="100%"/>
               </tr>
 
@@ -60,7 +60,6 @@ ENG
               
              
               <tr> 
-              
                     <form:textarea path="newsTextRU" rows="5" cols="30" width="100%"/>
               </tr>
 

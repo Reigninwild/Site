@@ -45,10 +45,14 @@ public class NewsDao extends HibernateDaoSupport implements INewsDao {
             }
         }
         
-        
-        
         return news;
     }
+    
+    public News getLast() {
+  	  List<News> news = getHibernateTemplate().find("from News");
+  	  
+        return news.get(news.size()-1);
+      }
 
     public News getTarget(int id) {
         List<News> news = getHibernateTemplate().find("from News n where n.newsID = "+id+"");

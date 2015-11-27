@@ -1,9 +1,15 @@
 package com.reigninwild.web;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,13 +32,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.reigninwild.orm.Crafts;
+import com.reigninwild.orm.Emails;
 import com.reigninwild.orm.Materials;
 import com.reigninwild.orm.News;
 import com.reigninwild.orm.Users;
 import com.reigninwild.services.ICraftsService;
+import com.reigninwild.services.IEmailsService;
 import com.reigninwild.services.IMaterialsService;
 import com.reigninwild.services.INewsService;
 import com.reigninwild.services.IUsersService;
+
 
 @Controller
 public class MainController {
@@ -50,6 +59,9 @@ public class MainController {
     private ICraftsService craftsService;
     
     @Autowired
+    private IEmailsService emailsService;
+    
+    @Autowired
     ServletContext context;
     
     // for logging
@@ -57,12 +69,17 @@ public class MainController {
     
     @RequestMapping("/")
     public String home(RedirectAttributes attributes) {
-        return "index";
+        return "home";
+    }
+    
+    @RequestMapping("/home")
+    public String indexhome(RedirectAttributes attributes) {
+        return "home";
     }
     
     @RequestMapping("/index")
     public String index(RedirectAttributes attributes) {
-        return "index";
+        return "home";
     }
     
     @RequestMapping("/login")
@@ -87,6 +104,7 @@ public class MainController {
     
     @RequestMapping("/items")
     public String items(RedirectAttributes attributes) {
+    	
         return "items";
     }
     
@@ -94,7 +112,31 @@ public class MainController {
     public String contacts(RedirectAttributes attributes) {
         return "contacts";
     }
+    
+    @RequestMapping("/about")
+    public String about(RedirectAttributes attributes) {
+        return "about";
+    }
+    
+    @RequestMapping("/news")
+    public String allnews(RedirectAttributes attributes) {
+        return "allnews";
+    }
+    
+    @RequestMapping("/gallary")
+    public String gallary(RedirectAttributes attributes) {
+        return "gallary";
+    }
+    
+    @RequestMapping("/videos")
+    public String videos(RedirectAttributes attributes) {
+        return "videos";
+    }
 
+    @RequestMapping(value="/errors/404.html")
+    public String handle404() {
+    	return "home";
+    }
 
     
     @ModelAttribute("news")
@@ -151,6 +193,7 @@ public class MainController {
         
         try {
             newsService.saveNews(news);
+        //    mailDelivery("test",news.getNewsText());
 
         } catch (IndexOutOfBoundsException e2) {
             LOG.log(Level.SEVERE, "Exception: ", e2);
@@ -219,6 +262,48 @@ public class MainController {
         return news;
     }
     
+    //select last count news
+    @RequestMapping(value = "/subscribe", method = RequestMethod.GET)
+    public @ResponseBody int subscribe(final HttpServletRequest request,@RequestParam("email") String email) {
+    int result=0;
+    try {
+       Emails emails = new Emails();
+       emails = emailsService.getEmail(email);
+       if (emails.getEmail() != null) {
+    	   result = 0;
+       }else {
+    	   emails = new Emails();
+    	   emails.setEmail(email);
+    	   emailsService.save(emails);
+    	   result = 1;
+       }
+       
+    } catch (IndexOutOfBoundsException e2) {
+        LOG.log(Level.SEVERE, "Exception: ", e2);
+    } catch (HibernateException e) {
+        LOG.log(Level.SEVERE, "Exception: ", e);
+    }
+    
+
+        return result;
+    }
+    
+    //select last count news
+    @RequestMapping(value = "/getallnews", method = RequestMethod.GET)
+    public @ResponseBody List<News> getAllNews(final HttpServletRequest request) {
+
+        List<News> news = new ArrayList<News>();
+        try {
+            news = newsService.getAllNews();
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+        }
+
+        return news;
+    }
+    
    
     
     //select last count news
@@ -228,6 +313,22 @@ public class MainController {
         List<News> news = new ArrayList<News>();
         try {
             news = newsService.getNewsCount(count);
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+        }
+
+        return news;
+    }
+    
+    //select last count news
+    @RequestMapping(value = "/getlast", method = RequestMethod.GET)
+    public @ResponseBody News getLast(final HttpServletRequest request) {
+
+        News news = new News();
+        try {
+            news = newsService.getLast();
         } catch (IndexOutOfBoundsException e2) {
             LOG.log(Level.SEVERE, "Exception: ", e2);
         } catch (HibernateException e) {
@@ -322,6 +423,7 @@ public class MainController {
         
         String result = "0";
         try {
+        
             EmailUtility.sendEmail(host, port, user, pass, "reigninwild@gmail.com", subject,
                     content);
             result="1";
@@ -332,6 +434,77 @@ public class MainController {
         return result;
     }
     
+    
+    //send email
+  //  @RequestMapping(value = "/sendemail", method = RequestMethod.GET)
+    public  String mailDelivery(String subject,String content) {
+
+        String host = context.getInitParameter("host");
+        String  port = context.getInitParameter("port");
+        String user = context.getInitParameter("user");
+        String pass = context.getInitParameter("pass");
+        
+        String result = "0";
+        try {
+        	
+        	List<Emails> emails = new ArrayList<Emails>();
+        	emails = emailsService.getEmails();
+        	
+        	for (int i=0;i<emails.size();i++){
+        		EmailUtility.sendEmail(host, port, user, pass, emails.get(i).getEmail(), "Reign in wild news and updates",
+                        content);
+        	}
+        	
+            
+            result="1";
+        } catch (Exception ex) {
+            result="0";
+        }
+      
+        return result;
+    } 
+    
+    @RequestMapping(value = "/generate", method = RequestMethod.GET)
+    public @ResponseBody String generateEmailList() {
+
+     
+        try {
+        	
+        	List<Emails> emails = new ArrayList<Emails>();
+        	emails = emailsService.getEmails();
+        	
+        	   try { 
+        		  
+        		 // File file = new File("C:/email_list.txt");
+        		 FileWriter writer = new FileWriter("email_list.txt",false);
+        		 BufferedWriter br = new BufferedWriter(writer);
+        	
+           
+               	for (int i=0;i<emails.size();i++){
+
+               		br.write(emails.get(i).getEmail());
+               		br.newLine();
+          
+               	}
+               	br.close();
+               	writer.close();
+               
+               }
+               catch(IOException ex){
+                    
+                   System.out.println(ex.getMessage());
+               } 
+        	
+        	
+        	
+            
+          
+        } catch (Exception ex) {
+        	  System.out.println(ex.getMessage());
+        }
+        return "1";
+      
+    } 
     
     
     

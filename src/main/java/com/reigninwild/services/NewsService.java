@@ -69,4 +69,10 @@ public class NewsService implements INewsService  {
         return newsDao.getTarget(id);
     }
 
+
+	public News getLast() {
+		// TODO Auto-generated method stub
+		return newsDao.getLast();
+	}
+
 }

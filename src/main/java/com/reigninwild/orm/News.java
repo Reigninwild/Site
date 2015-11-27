@@ -29,6 +29,10 @@ public class News implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "my_entity_seq_gen")
     @SequenceGenerator(name = "my_entity_seq_gen", sequenceName = "catalog_seq")
     private int newsID;
+    
+    /*------------*/
+    @Column(name = "news_title", nullable = true, length = 200)
+    private String newsTitle;
 
     /*------------*/
     @Column(name = "news_text", nullable = true, length = 1000)
@@ -86,6 +90,14 @@ public class News implements Serializable {
     public void setNewsTextRU(String newsTextRU) {
         this.newsTextRU = newsTextRU;
     }
+
+	public String getNewsTitle() {
+		return newsTitle;
+	}
+
+	public void setNewsTitle(String newsTitle) {
+		this.newsTitle = newsTitle;
+	}
 
 
 

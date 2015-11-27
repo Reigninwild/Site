@@ -15,7 +15,7 @@
 		<mapping class="com.reigninwild.orm.Guides" />
 		<mapping class="com.reigninwild.orm.Materials" />
 		<mapping class="com.reigninwild.orm.Crafts" />
-
+		<mapping class="com.reigninwild.orm.Emails" />
 
 
 	</session-factory>

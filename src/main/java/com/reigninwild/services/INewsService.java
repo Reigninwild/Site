@@ -17,5 +17,7 @@ public interface INewsService {
     public List<News> getAllNews();
     
     public List<News> getNewsCount(int count);
+    
+    public News getLast();
   
 }
