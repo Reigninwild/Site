@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -23,7 +24,7 @@
 		 $(document).ready(
 				
 		         function() {
-		        	 getLastNews();
+		        	// getLastNews();
 		        	 
 		        	 /*
 		        		$('#pagination-demo').twbsPagination({
@@ -167,15 +168,23 @@
 <div class="wrapper row4">
   <footer id="footer" class="clear"> 
     <!-- ################################################################################################ -->
-    <div class="two_third first">
+         <div class="two_third first">
       <h6 class="title">Latest news</h6>
       <div id="news">     <p>No updates</p></div>
     <!--   <img class="imgl pad5 borderedbox" src="${pageContext.request.contextPath}/resources/images/screenshots/screen1.png" alt=""> --> 
+ 
+ 	<div id='news_title'></div>
+ 	<div id='news_text'><p>${lastNews.newsText}</p></div>
+ 	<div id='news_date'>
+ 		<div class='glyphicon glyphicon-calendar'> <fmt:formatDate value="${lastNews.newsDate}" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+ 	</div>
  
     	    <div class="wrapper row228">
    			<a href="${pageContext.request.contextPath}/news"> <div class="learn_more3">More news</div> </a>
     	</div>
     </div>
+    
+  
  
 
     <div class="one_third">

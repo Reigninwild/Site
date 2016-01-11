@@ -1,6 +1,7 @@
 //var url = "http://app-reigninwild.rhcloud.com/reign";
 
-var url = "http://localhost:8080/reigninwildWebApp";
+var url = "http://54.67.13.61:8080";
+//var url = "http://reigninwild1.appspot.com";
 
 function show_more() {
 
@@ -93,7 +94,7 @@ function subscribe(){
 		contentType : 'application/json',
 		cache : false,
 		success : function(data) {
-			console.log(data);
+			
 			if (data == 0) {
 				$("#email_error").text("You are already subscribed to updates");
 				$("#email_error").css("color","red");

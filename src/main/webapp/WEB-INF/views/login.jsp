@@ -16,16 +16,17 @@
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>
 </head>
 
-<c:url value="/j_spring_security_check" var="login" />
-<form action="${login}" method="post" >
+<c:url value="/login" var="login" />
+<form action="${pageContext.request.contextPath}/login" method="post" >
+
         
- 
+ <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
    			<table>
                 <tr> <td width="50%">
                          Username 
                      </td>
                      <td width="50%">
-                          <input id="j_username" name="j_username" size="20" maxlength="30" type="text" />
+                          <input id="j_username" name="username" placeholder="Username" size="20" maxlength="30" type="text" />
                      </td>
                </tr>
 
@@ -34,7 +35,7 @@
                         Password
                      </td>
                      <td width="50%">
-                           <input id="j_password" name="j_password" size="20" maxlength="30" type="password" />
+                           <input id="j_password" name="password" placeholder="Password" size="20" maxlength="30" type="password" />
                      </td>
                 </tr>           
            </table>

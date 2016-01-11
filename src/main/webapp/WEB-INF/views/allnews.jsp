@@ -18,17 +18,6 @@
 <script src="${pageContext.request.contextPath}/resources/pagination/jquery.twbsPagination.js"></script>
 <link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 
-<script>
-
-		 $(document).ready(
-				
-		         function() {
-		        	 getAllNews();
-		        	        
-		         });
-
-
-</script>
 
 
 </head>
@@ -40,7 +29,13 @@
     <div class="wrapper row3">
   <div id="container" class="clear"> 
 	<div id="news">
-	
+	<c:forEach items="${allnews}" var="news">
+	<div id='news_title'>${news.newsTitle}</div>
+	<div id='news_text'>${news.newsText}</div>
+	<div id='news_date'><div class='glyphicon glyphicon-calendar'><fmt:formatDate value="${news.newsDate}" pattern="yyyy-MM-dd HH:mm:ss" /></div></div>
+	<div class='bot_line'></div>
+
+</c:forEach>
 	</div>
 
 
