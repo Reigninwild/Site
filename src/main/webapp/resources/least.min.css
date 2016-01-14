@@ -84,9 +84,7 @@ img {
   /* @group Smallimages */
 }
 #least .least-preview {
-  background-color: whitesmoke;
-  border-bottom: 2px solid;
-  border-color: #f1f0f0;
+  background-color: #c4a881;
   padding: 50px 0;
   margin-bottom: 10px;
   display: none;

@@ -9,7 +9,7 @@
 (function($){ 
 	$.fn.least = function(options) {
 		var settings = $.extend({
-			'random': true,
+			'random': false,
 			'scrollToGallery': true,
 			'HiDPI': false
 		}, options);

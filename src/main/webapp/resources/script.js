@@ -1,6 +1,7 @@
 //var url = "http://app-reigninwild.rhcloud.com/reign";
 
-var url = "http://54.67.13.61:8080";
+var url = "http://ec2-54-67-13-61.us-west-1.compute.amazonaws.com";
+//var url = "http://localhost:8070";
 //var url = "http://reigninwild1.appspot.com";
 
 function show_more() {
@@ -115,6 +116,102 @@ function subscribe(){
 	}
 }
 
+function send_timezone(timezone){
+	
+
+	$.ajax({
+		type : 'get',
+		url : url + '/news/settimezone',
+		data : {
+			'timezone' : timezone
+		},
+		dataType : "json",
+		contentType : 'application/json',
+		cache : false,
+		success : function(data) {
+
+		},
+		error : function(XmlHttpRequest, textStatus, errorThrown) {
+		}
+	});
+	
+}
+
+
+function add_picture(){
+	
+	$("#upload_status").text("Uploading...");
+	$("#upload_status").css("display","block");
+	var pic_desc = $("#pic_desc").val();
+	var pic_url = $("#pic_url").val();
+	
+
+	$.ajax({
+		type : 'get',
+		url : url + '/uploadpicture',
+		data : {
+			'desc' : pic_desc,
+			'url' : pic_url
+		},
+		dataType : "json",
+		contentType : 'application/json',
+		cache : false,
+		success : function(data) {
+			
+			if (data == 0) {
+				$("#upload_status").text("Uploading failed");
+				$("#upload_status").css("display","block");
+			} else if (data == 1){
+				$("#upload_status").text("File successfully uploaded");
+				$("#upload_status").css("display","block");
+			}
+			
+		},
+		error : function(XmlHttpRequest, textStatus, errorThrown) {
+
+
+		}
+	});
+	
+}
+
+
+function add_video(){
+	
+	$("#v_upload_status").text("Uploading...");
+	$("#v_upload_status").css("display","block");
+	var pic_desc = $("#vid_desc").val();
+	var pic_url = $("#vid_url").val();
+	
+
+	$.ajax({
+		type : 'get',
+		url : url + '/uploadvideo',
+		data : {
+			'desc' : pic_desc,
+			'url' : pic_url
+		},
+		dataType : "json",
+		contentType : 'application/json',
+		cache : false,
+		success : function(data) {
+			
+			if (data == 0) {
+				$("#v_upload_status").text("Uploading failed");
+				$("#v_upload_status").css("display","block");
+			} else if (data == 1){
+				$("#v_upload_status").text("File successfully uploaded");
+				$("#v_upload_status").css("display","block");
+			}
+			
+		},
+		error : function(XmlHttpRequest, textStatus, errorThrown) {
+
+		}
+	});
+	
+}
+
 function validateEmail(email) {
 	/*
 	 * checking email/ Email must have @, dot . after @, and at least 2 sumbols
@@ -127,6 +224,30 @@ function validateEmail(email) {
 	result =1 ;
 	} 
 return result;
+}
+
+function getNewsCount(page) {
+	
+	$.ajax({
+		type : 'get',
+		url : url + '/news/getnewscount',
+		data : {
+			'page' : page
+		},
+		dataType : "json",
+		contentType : 'application/json',
+		cache : false,
+		success : function(data) {
+			$("#news").empty();
+			drawNews(data);
+			//draw news
+			
+		},
+		error : function(XmlHttpRequest, textStatus, errorThrown) {
+
+		}
+	});
+	
 }
 
 
@@ -151,6 +272,7 @@ function getLastNews() {
 		}
 	});
 }
+
 
 var newsCount=0;
 
@@ -182,8 +304,14 @@ function drawNews(data) {
 		drawNewsItem(data[i]);
 	}
 }
+
 function drawNewsItem(rowData) {
-	
+	/*
+	$("#"+rowData.newsID+" #news_title").text(rowData.newsTitle);
+	$("#news_text").text(rowData.newsText);
+	$("#news_date .glyphicon glyphicon-calendar").html("<fmt:formatDate value="+rowData.newsDate+" pattern='yyyy-MM-dd HH:mm:ss' />");
+	*/
+	/*
 	var date = new Date(rowData.newsDate);
 	var row = $("<div id='news_title'>"+rowData.newsTitle+"</div><div id='news_text'>"
 					+ rowData.newsText
@@ -195,9 +323,36 @@ function drawNewsItem(rowData) {
 	
 	var line = $("<div class='bot_line'></div>");
 	$("#news").append(line);
+	*/
+	
+	var date = new Date(rowData.newsDate);
+	date.yyyymmdd();
+	
+	var row = $("<div id='news_title'>"+rowData.newsTitle+"</div><div id='news_text'>"
+					+ rowData.newsText
+					+ "</div><div id='news_date'><div class='glyphicon glyphicon-calendar'></div>"
+					+ date.yyyymmdd()
+					+ "</div><div id='news_author'></div> ");
+	$("#news").append(row);
+	
+	var line = $("<div class='bot_line'></div>");
+	$("#news").append(line);
 	
 	
 }
+
+
+Date.prototype.yyyymmdd = function() {
+	   var yyyy = this.getFullYear().toString();
+	   var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+	   var dd  = this.getDate().toString();
+	   
+	   var hh  = this.getHours().toString();
+	   var min  = this.getMinutes().toString();
+	   var ss  = this.getSeconds().toString();
+	   return yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0])+" "+(hh[1]?hh:"0"+hh[0])+":"+ (min[1]?min:"0"+min[0])+":"+ (ss[1]?ss:"0"+ss[0]); // padding
+	  };
+
 function fullnews(id,text){
 //	location.href = '${pageContext.request.contextPath}/leagues/${leaguename}/${standing.getSID().team.getName()}/roster }';
 
@@ -241,31 +396,6 @@ function addcraft(){
 	
 }
 
-function addCraftMaterial(craft_id,material_id,count){
-	console.log("add "+craft_id+" "+material_id+" "+count);
-
-	$.ajax({
-		type : 'GET',
-		url : url + '/savecraft',
-		dataType : "json",
-		data : {
-			'craft_id' : craft_id,
-			'material_id' : material_id,
-			'count' : count
-			
-		},
-		contentType : 'application/json',
-		cache : false,
-		success : function(data) {
-			location.reload();
-		},
-		error : function(XmlHttpRequest, textStatus, errorThrown) {
-
-			 console.log("standings error= " + errorThrown);
-
-		}
-	});
-}
 
 function showMaterialsType(type){
 	

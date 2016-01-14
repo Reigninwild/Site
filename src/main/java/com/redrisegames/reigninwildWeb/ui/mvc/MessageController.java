@@ -13,9 +13,17 @@
 
 package com.redrisegames.reigninwildWeb.ui.mvc;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +32,7 @@ import javax.validation.Valid;
 
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -39,10 +48,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.redrisegames.reigninwildWeb.orm.News;
 import com.redrisegames.reigninwildWeb.services.IEmailsService;
+import com.redrisegames.reigninwildWeb.services.IMediaService;
 import com.redrisegames.reigninwildWeb.services.INewsService;
 import com.redrisegames.reigninwildWeb.services.IUsersService;
+import com.redrisegames.reigninwildWeb.orm.Media;
 import com.redrisegames.reigninwildWeb.orm.Users;
 import com.redrisegames.reigninwildWeb.orm.Emails;
+import com.redrisegames.reigninwildWeb.web.EmailUtility;
 
 
 
@@ -65,31 +77,43 @@ public class MessageController {
 	  @Autowired
 	    private IUsersService usersService;
 	  
+	  @Autowired
+      private IMediaService mediaService;
+	 
+	  
 	  @ModelAttribute("news")
 	    public News createNews() {
 	        return new News();
 	    }
 	  
-	  @ModelAttribute("allnews")
-      public List<News> allNews() {
-	      List<News> news = new ArrayList<News>();
+
+	  @RequestMapping("/")
+	    public String index(RedirectAttributes attributes, Model model) {
+	      
+	      News news = new News();
 	        try {
-	            news = newsService.getAllNews();
+	            news = newsService.getLast();
+	            model.addAttribute("lastNews", news);
 	        } catch (IndexOutOfBoundsException e2) {
 	            LOG.log(Level.SEVERE, "Exception: ", e2);
 	        } catch (HibernateException e) {
 	            LOG.log(Level.SEVERE, "Exception: ", e);
 	        }
-            return news;
-      }
-	
-	  @RequestMapping("/")
-	    public String index(RedirectAttributes attributes) {
+	      
 	        return "home";
 	    }
 	  
     @RequestMapping("/home")
-    public String indexhome(RedirectAttributes attributes) {
+    public String indexhome(RedirectAttributes attributes, Model model) {
+        News news = new News();
+        try {
+            news = newsService.getLast();
+            model.addAttribute("lastNews", news);
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+        }
         return "home";
     }
     
@@ -109,30 +133,16 @@ public class MessageController {
     public String about(RedirectAttributes attributes) {
         return "about";
     }
-    
-    @RequestMapping("/news")
-    public String allnews(RedirectAttributes attributes) {
-        return "allnews";
-    }
-    
-    @RequestMapping("/gallary")
-    public String gallary(RedirectAttributes attributes) {
-        return "gallary";
-    }
-    
-    @RequestMapping("/videos")
-    public String videos(RedirectAttributes attributes) {
-        return "videos";
-    }
 
-    @RequestMapping(value="/errors/404.html")
-    public String handle404() {
-        return "home";
-    }
     
     @RequestMapping("/login")
     public String login(RedirectAttributes attributes) {
         return "login";
+    }
+    
+    @RequestMapping("/upload")
+    public String picture(RedirectAttributes attributes) {
+        return "upload";
     }
     
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
@@ -143,41 +153,39 @@ public class MessageController {
     public String signinFailure(RedirectAttributes attributes) {
         return "redirect:/login";
     }
-	
-	
-    //select last 3 news
-    @ModelAttribute("lastNews")
-    public News loadLast(final HttpServletRequest request) {
-
-        News news = new News();
-        try {
-            news = newsService.getLast();
-        } catch (IndexOutOfBoundsException e2) {
-            LOG.log(Level.SEVERE, "Exception: ", e2);
-        } catch (HibernateException e) {
-            LOG.log(Level.SEVERE, "Exception: ", e);
-        }
-
-        return news;
-    }
    
 
     @RequestMapping(value = "/addnew", method = RequestMethod.POST)
     public String addNews(@ModelAttribute("news") News news, BindingResult result,
-            RedirectAttributes attributes, HttpServletRequest request, @RequestParam String newsTitle) {
+            RedirectAttributes attributes, HttpServletRequest request, @RequestParam String newsTitle) throws ParseException {
         // ROLE_USER - default group for new users
         
         
-        news.setNewsDate(new Date());
+        /*
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // Use London's time zone to format the date in
+        df.setTimeZone(TimeZone.getTimeZone("Etc/GMT+3"));
+        String formated = df.format(date);
+        Date converteddate = null;
+        DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        converteddate = df2.parse(formated);
+        
+        */
+        
+        SimpleDateFormat dateFormatGmt = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
+        dateFormatGmt.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+        //Local time zone   
+        SimpleDateFormat dateFormatLocal = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
+
+        //Time in GMT
+       Date date = dateFormatLocal.parse( dateFormatGmt.format(new Date()) );
+        
+        news.setNewsDate(date);
         news.setNewsTitle(newsTitle);
-        Users user = new Users();
-        try{
-            user = usersService.getUserbyName(request.getUserPrincipal().getName());  
-        } catch(Exception e){
-            
-        }
-         
-        news.setUuser(user);
+
         
         try {
             newsService.saveNews(news);
@@ -241,5 +249,119 @@ public class MessageController {
 
         return news.size();
     }
+    
+    
+    @RequestMapping(value = "/generate", method = RequestMethod.GET)
+    public @ResponseBody String generateEmailList() {
+
+     
+        try {
+            
+            List<Emails> emails = new ArrayList<Emails>();
+            emails = emailsService.getEmails();
+            
+               try { 
+                  
+                 // File file = new File("C:/email_list.txt");
+                 FileWriter writer = new FileWriter("email_list.txt",false);
+                 BufferedWriter br = new BufferedWriter(writer);
+            
+           
+                for (int i=0;i<emails.size();i++){
+
+                    br.write(emails.get(i).getEmail());
+                    br.newLine();
+          
+                }
+                br.close();
+                writer.close();
+               
+               }
+               catch(IOException ex){
+                    
+                   System.out.println(ex.getMessage());
+               } 
+            
+            
+            
+            
+          
+        } catch (Exception ex) {
+              System.out.println(ex.getMessage());
+        }
+        return "1";
+      
+    } 
+    
+    //select last count news
+    @RequestMapping(value = "/uploadpicture", method = RequestMethod.GET)
+    public @ResponseBody int addPicture(final HttpServletRequest request,@RequestParam("desc") String description,@RequestParam("url") String url) {
+        
+        Media media = new Media();
+        media.setType("p");
+        media.setDescription(description);
+        media.setUrl(url);
+    
+    try {
+            mediaService.save(media);
+    } catch (IndexOutOfBoundsException e2) {
+        LOG.log(Level.SEVERE, "Exception: ", e2);
+        return 0;
+    } catch (HibernateException e) {
+        LOG.log(Level.SEVERE, "Exception: ", e);
+        return 0;
+    }
+    
+
+        return 1;
+    }
+    
+    //select last count news
+    @RequestMapping(value = "/uploadvideo", method = RequestMethod.GET)
+    public @ResponseBody int addVideo(final HttpServletRequest request,@RequestParam("desc") String description,@RequestParam("url") String url) {
+        
+        Media media = new Media();
+        media.setType("v");
+        media.setDescription(description);
+        media.setUrl(url);
+    
+    try {
+            mediaService.save(media);
+    } catch (IndexOutOfBoundsException e2) {
+        LOG.log(Level.SEVERE, "Exception: ", e2);
+        return 0;
+    } catch (HibernateException e) {
+        LOG.log(Level.SEVERE, "Exception: ", e);
+        return 0;
+    }
+        return 1;
+    }
+    
+    @Value("${spring.mail.host}")
+    private String host;
+    @Value("${spring.mail.port}")
+    private String port;
+    @Value("${spring.mail.username}")
+    private String user;
+    @Value("${spring.mail.password}")
+    private String pass;
+    
+    //send email
+    @RequestMapping(value = "/sendemail", method = RequestMethod.GET)
+    public @ResponseBody String sendEmail(final HttpServletRequest request,@RequestParam("subject") String subject,@RequestParam("content") String content) {
+        
+        String result = "0";
+        try {
+        
+            EmailUtility.sendEmail(host, port, user, pass, "reigninwild@gmail.com", subject,
+                    content);
+            result="1";
+        } catch (Exception ex) {
+            result="0";
+        }
+      
+        return result;
+    }
+    
 
 }

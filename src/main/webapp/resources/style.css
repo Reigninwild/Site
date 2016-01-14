@@ -614,8 +614,37 @@ float:right;
     background-color: rgba(209, 46, 46, 0.8);
 }
  
+ .error_text{
+ font-size:20px;
+ color:white;
+ text-align:center;
+
+ width:500px;
+ height:100px;
+ left:50%;
+ margin-left:-250px;
+ position:absolute; 
+ top:50%;
+ margin-top:-50px;
+ }
+ .separator{
+ width:1024px;
+ height:60px;
+  background:url(images/separator.png);
+  position:absolute;
+  overflow: none;
+ }
  
+ /*-----------gallary------------*/
  
+ .gallary_picture{
+ width:240px;
+ height:150px;
+ }
+ 
+ .upload_warn{
+ color:red;
+ }
 /* ---------- Adaptive --------- */
  
 @media screen and (max-width: 1280px) {

@@ -29,6 +29,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -38,19 +40,21 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.http.HttpStatus;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.redrisegames.reigninwildWeb.dao.EmailsDao;
 import com.redrisegames.reigninwildWeb.dao.IEmailsDao;
+import com.redrisegames.reigninwildWeb.dao.IMediaDao;
 import com.redrisegames.reigninwildWeb.dao.INewsDao;
 import com.redrisegames.reigninwildWeb.dao.IUsersDao;
+import com.redrisegames.reigninwildWeb.dao.MediaDao;
 import com.redrisegames.reigninwildWeb.dao.NewsDao;
 import com.redrisegames.reigninwildWeb.dao.UsersDao;
 import com.redrisegames.reigninwildWeb.orm.Users;
@@ -118,7 +122,10 @@ public class SampleWebUiApplication extends SpringBootServletInitializer{
 	       return new UsersDao();  
 	    }
 	    
-	 
+	    @Bean  
+        public IMediaDao mediaDao() {  
+           return new MediaDao();  
+        }
 	
 	    
 	    
@@ -153,6 +160,10 @@ public class SampleWebUiApplication extends SpringBootServletInitializer{
 	         factory.setEntityManagerFactory(emf);
 	         return factory;
 	    }
+	    
+	    
+	    
+
 	    
 	    
 	public static void main(String[] args) throws Exception {

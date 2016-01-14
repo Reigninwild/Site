@@ -53,9 +53,9 @@ public class NewsService implements INewsService  {
     }
 
 
-    public List<News> getNewsCount(int count) {
+    public List<News> getNewsCount(int count,int newsOnPage) {
         // TODO Auto-generated method stub
-        return newsDao.getNewCount(count);
+        return newsDao.getNewCount(count,newsOnPage);
     }
 
 
@@ -69,5 +69,12 @@ public class NewsService implements INewsService  {
 		// TODO Auto-generated method stub
 		return newsDao.getLast();
 	}
+
+
+
+    @Override
+    public int getCount() {
+        return newsDao.getCount();
+    }
 
 }

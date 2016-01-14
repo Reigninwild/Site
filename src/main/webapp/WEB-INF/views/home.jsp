@@ -173,7 +173,7 @@
       <div id="news">     <p>No updates</p></div>
     <!--   <img class="imgl pad5 borderedbox" src="${pageContext.request.contextPath}/resources/images/screenshots/screen1.png" alt=""> --> 
  
- 	<div id='news_title'></div>
+ 	<div id='news_title'><h>${lastNews.newsTitle}</h></div>
  	<div id='news_text'><p>${lastNews.newsText}</p></div>
  	<div id='news_date'>
  		<div class='glyphicon glyphicon-calendar'> <fmt:formatDate value="${lastNews.newsDate}" pattern="yyyy-MM-dd HH:mm:ss" /></div>

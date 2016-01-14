@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,26 +49,26 @@ public class NewsDao implements INewsDao {
         return news;
     }
 
-    public List<News> getNewCount(int count) {
-        List<News> allnews = (List<News>) hibernateTemplate.find("from News n order by n.newsID DESC");
+    public List<News> getNewCount(int page,int newsOnPage) {
+        List<News> allnews = (List<News>) hibernateTemplate.find("from News n order by n.newsID ASC");
+        
+        int size = allnews.size();
+        int first= (size-1) - (page-1)*newsOnPage;
+        int last= ((size-1) - (page-1)*newsOnPage-2 > 0) ? (size-1) - (page-1)*newsOnPage-2 : 0;
         
         List<News> news = new ArrayList<News>();
-        
-        if (allnews.size() > count) {
-            if ((allnews.size() - count) < 3) {
-                news = allnews.subList(count, count + (allnews.size() - count));
-            } else {
-                news = allnews.subList(count, count + 3);
-            }
-        }
+        news = allnews.subList(last,first+1);
         
         return news;
     }
     
     public News getLast() {
-  	  List<News> news = (List<News>) hibernateTemplate.find("from News");
+  	  List<News> news = (List<News>) hibernateTemplate.find("from News n order by n.newsID DESC LIMIT 1");
+  	  News onenews = null;
+  	  if (news.size() > 0)
+  	    onenews  = news.get(0);
   	  
-        return news.get(news.size()-1);
+        return onenews;
       }
 
     public News getTarget(int id) {
@@ -76,5 +77,11 @@ public class NewsDao implements INewsDao {
         if (news.size()!=0) result = news.get(0);
         else result =null;
         return result;
+    }
+
+
+    public int getCount() {
+        int count = DataAccessUtils.intResult(hibernateTemplate.find("select count(*) from News"));
+        return count;
     }
 }

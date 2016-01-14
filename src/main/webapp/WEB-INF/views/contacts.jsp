@@ -36,7 +36,7 @@
 				<div class="col-xs-2">
 				 <div class="rep_label">Subject</div>
 				</div>
-				<div class="col-xs-10">
+				<div class="col-xs-9">
 				 <input type="text" id="subject" size="20"/>
 				</div>
 			</div>
@@ -45,8 +45,8 @@
 				<div class="col-xs-2">
 				 <div class="rep_label"> Message </div>
 				</div>
-				<div class="col-xs-10">
-				<textarea rows="10" cols="20" id="content"></textarea>
+				<div class="col-xs-9">
+				<textarea rows="10" cols="15" id="content"></textarea>
 				<div class="send_button" onclick="send_report()">Send message</div>
 				</div>
 				

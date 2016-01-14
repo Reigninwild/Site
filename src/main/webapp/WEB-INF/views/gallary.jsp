@@ -51,76 +51,17 @@ $(document).ready(function(){
             <!-- Least Gallery: Thumbnails -->
             <ul class="least-gallery">
                 <!-- 1 || Element with data-caption ||-->
-                <li>
-             
- 					<iframe src="http://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
-                      
-                </li>
-                
-                <!-- 2 || Element with data-caption as href-attribute ||-->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/02.jpg" title="Train Rails" data-subtitle="View Picture" data-caption="Now it's possibe to add an URL-Link into caption text - <a href='http://www.google.com' target='_blank'>GOOGLE</a>">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/02.jpg" alt="Alt Image Text" />
+                <c:forEach items="${pictures}" var="picture">
+                 <li>
+					 <a href="${picture.url}" title="${picture.description}" data-subtitle="View Picture" data-caption=" ©Reigninwild.com, 2016">
+                        <div class="gallary_picture"><img src="${picture.url}" alt="${picture.description}" /></div>
                     </a>
-                </li>
-                
-                <!-- 3 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/03.jpg" title="Apple" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/03.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
-
-                <!-- 4 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/04.jpg" title="Road Trip" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/04.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
-
-                <!-- 5 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/05.jpg" title="Desert" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/05.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
-
-                <!-- 6 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/06.jpg" title="Tree" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/06.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
-
-                <!-- 7 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/07.jpg" title="MacBook" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/07.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
-
-                <!-- 8 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/08.jpg" title="Clock" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/08.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
-
-                <!-- 9 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/09.jpg" title="iPhone" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/09.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
-
-                <!-- 10 -->
-                <li>
-                    <a href="${pageContext.request.contextPath}/resources/media/big/10.jpg" title="New York" data-subtitle="View Picture">
-                        <img src="${pageContext.request.contextPath}/resources/media/thumbnails/10.jpg" alt="Alt Image Text" />
-                    </a>
-                </li>
+				 </li>
+				</c:forEach>
             </ul>
 
+
+        
         </section>
         <!-- Least Gallery end -->
   

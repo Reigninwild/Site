@@ -56,15 +56,11 @@ $(document).ready(function() {
             <!-- Least Gallery: Thumbnails -->
             <ul class="least-gallery">
                 <!-- 1 || Element with data-caption ||-->
-                <li>
- 				
-				<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/zxbz3DDQzHU" frameborder="0" allowfullscreen></iframe>
-                </li>
-                
-                <!-- 2 || Element with data-caption as href-attribute ||-->
-                <li>
-				<iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/zxbz3DDQzHU" frameborder="0" allowfullscreen></iframe>           
+                 <c:forEach items="${videos}" var="video">
+                 <li>
+                 <iframe id="video" width="560" height="315" src="${video.url}" frameborder="0" allowfullscreen></iframe>
                  </li>
+                 </c:forEach>
             </ul>
 
         </section>

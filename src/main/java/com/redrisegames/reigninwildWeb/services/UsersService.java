@@ -28,7 +28,7 @@ public class UsersService implements IUsersService,UserDetailsService  {
 
     @Autowired
     private IUsersDao usersDao;
-
+                
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     public void saveUser(Users user) {
         

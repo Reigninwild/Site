@@ -403,6 +403,11 @@ display:none;
 color:red;
 }
 
+#upload_status{
+display:none;
+color:red;
+}
+
 .bot_line{
 border-top:5px solid #c2a67f;	
 margin-top:50px;

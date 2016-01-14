@@ -23,9 +23,13 @@ import com.redrisegames.reigninwildWeb.services.UsersService;
 public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
         http
             .authorizeRequests()
                 .antMatchers("/addnews/**").authenticated()
+                .antMatchers("/upload/**").authenticated()
+                .antMatchers("/uploadvideo/**").authenticated()
+                 .antMatchers("/uploadpicture/**").authenticated()
                 .antMatchers("/", "/home").permitAll()
                 .anyRequest().permitAll()
                 .and()

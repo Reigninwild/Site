@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,25 +15,25 @@
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jstz.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jstz.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>
 
 
 
 <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
 
-<script>tinymce.init({selector:'textarea',
-	plugins: "image",
 
-	
-	     
-	        
+
+<script>tinymce.init({selector:'textarea',
+	plugins: "image",      
 });
+
 
 
 $(document).ready(function(){
     
-	  $('#myTable').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:4});
-	    
+ 
 	});
 </script>
 
@@ -41,7 +42,6 @@ $(document).ready(function(){
 <body>
 
 <div class="container">
-
 
 
 <form:form method="post" action="addnew" commandName="news" id="add_news" >
