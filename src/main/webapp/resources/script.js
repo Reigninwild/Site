@@ -1,6 +1,6 @@
 //var url = "http://app-reigninwild.rhcloud.com/reign";
 
-var url = "http://ec2-54-67-13-61.us-west-1.compute.amazonaws.com";
+var url = "http://ec2-54-153-47-168.us-west-1.compute.amazonaws.com:8080";
 //var url = "http://localhost:8070";
 //var url = "http://reigninwild1.appspot.com";
 
