@@ -52,9 +52,9 @@
 					<div class='bot_line'></div>
 
 				</c:forEach>
-				<ul id="pagination-demo" class="pagination-lg"></ul>
+				
 			</div>
-
+			<ul id="pagination-demo" class="pagination-lg"></ul>
 
 		</div>
 
