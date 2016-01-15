@@ -14,26 +14,14 @@
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
-<script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/resources/pagination/jquery.twbsPagination.js"></script>
 <link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-<script src="${pageContext.request.contextPath}/resources/pagination/jquery.twbsPagination.js"></script>
-
-<script type='text/javascript'>
-var dateVar = new Date();
-var timezone = dateVar.getTimezoneOffset()/60 * (-1);  
-send_timezone(timezone);
-</script> 
-
 
 <script>
-
 		 $(document).ready(
-				
 		         function() {
 		        	var size = '${newsCount}';
 		        	var pageCount = Math.ceil(size/3);
-
 		        		$('#pagination-demo').twbsPagination({
 		        		    totalPages: pageCount,
 		        		    visiblePages: 5,
@@ -41,55 +29,41 @@ send_timezone(timezone);
 		        		    	getNewsCount(page);
 		        		    }
 		        		});
-		        		
-		        		
-		             
 		         });
-
-
 </script>
 
 </head>
 <body>
 
-<!-- ################################################################################################ -->
-<%@include  file="topblock.jsp" %>
+	<%@include file="topblock.jsp"%>
 
-    <div class="wrapper row3">
-  <div id="container" class="clear"> 
-	<div id="news">
-	<c:forEach items="${allnews}" var="news">
-		<div id='news_title'>${news.newsTitle}</div>
-		<div id='news_text'>${news.newsText}</div>
-		<div id='news_date'><div class='glyphicon glyphicon-calendar'><fmt:formatDate value="${news.newsDate}" pattern="yyyy-MM-dd HH:mm:ss" /></div></div>
-	<div class='bot_line'></div>
+	<div class="wrapper row3">
+		<div id="container" class="clear">
+			<div id="news">
+				<c:forEach items="${allnews}" var="news">
+					<div id='news_title'>${news.newsTitle}</div>
+					<div id='news_text'>${news.newsText}</div>
+					<div id='news_date'>
+						<div class='glyphicon glyphicon-calendar'>
+							<fmt:formatDate value="${news.newsDate}"
+								pattern="yyyy-MM-dd HH:mm:ss" />
+						</div>
+					</div>
+					<div class='bot_line'></div>
 
-</c:forEach>
+				</c:forEach>
+				<ul id="pagination-demo" class="pagination-lg"></ul>
+			</div>
+
+
+		</div>
+
+		<div class="clear"></div>
 	</div>
 
 
-    </div>
+	<%@include file="footer.jsp"%>
 
-    <div class="clear"></div>
-</div> 
-
-
-    <!-- ################################################################################################ -->
-<div class="wrapper row5">
-  <div id="copyright" class="clear"> 
-    <p class="fl_left"> &copy; <a href="${pageContext.request.contextPath}/home">Reigninwild.com</a>, 2015</p>
-  </div>
-</div>
-<div class="wrapper row0"><footer id="footer" class="clear"></footer></div>
-<!-- ################################################################################################ --> 
-   
-<!-- ################################################################################################ --> 
-<ul id="pagination-demo" class="pagination-lg">
-
-</ul>
-
-
-<!-- ################################################################################################ -->
 
 </body>
 </html>

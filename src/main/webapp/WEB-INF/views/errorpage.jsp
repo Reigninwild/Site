@@ -1,11 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-    pageEncoding="utf8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,25 +11,13 @@
 
 </head>
 <body>
-
-
-    
-    
-    <div class="wrapper">
-  <div id="container" class="clear"> 
-    <!-- container body --> 
-    <!-- ################################################################################################ -->
- <div class="error_text">Page not found. <a href="${pageContext.request.contextPath}/home">Go home</a></div>
-    <!-- ################################################################################################ --> 
-    <!-- / container body -->
-   </div>
-</div>
-
-
-<!-- ################################################################################################ --> 
-
-
-
-    
+	<div class="wrapper">
+		<div id="container" class="clear">
+			<div class="error_text">
+				Page not found. <a href="${pageContext.request.contextPath}/home">Go
+					home</a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

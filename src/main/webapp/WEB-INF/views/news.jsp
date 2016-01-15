@@ -10,67 +10,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Reign in wild: add news</title>
-
-<link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/script.js"></script>
-<script src="${pageContext.request.contextPath}/resources/jstz.js"></script>
-<script src="${pageContext.request.contextPath}/resources/jstz.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>
-
-
-
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
-
-
 
 <script>tinymce.init({selector:'textarea',
 	plugins: "image",      
 });
-
-
-
-$(document).ready(function(){
-    
- 
-	});
 </script>
-
-
 </head>
 <body>
+	<div class="container">
 
-<div class="container">
-
-
-<form:form method="post" action="addnew" commandName="news" id="add_news" >
+		<form:form method="post" action="addnew" commandName="news"
+			id="add_news">
 ENG
             <table width="100%">
-              
-             
-              <tr> 
-              		<label>Title:</label><form:input path="newsTitle" rows="1" cols="30" width="100%"/>
-                    <form:textarea path="newsText" rows="5" cols="30" width="100%"/>
-              </tr>
 
-            </table>
+
+				<tr>
+					<label>Title:</label>
+					<form:input path="newsTitle" rows="1" cols="30" width="100%" />
+					<form:textarea path="newsText" rows="5" cols="30" width="100%" />
+				</tr>
+
+			</table>
             RU
               <table width="100%">
-              
-             
-              <tr> 
-                    <form:textarea path="newsTextRU" rows="5" cols="30" width="100%"/>
-              </tr>
+				<tr>
+					<form:textarea path="newsTextRU" rows="5" cols="30" width="100%" />
+				</tr>
 
-            </table>
-          
-              <input type="submit" value="Submit">
-</form:form>
+			</table>
+			<input type="submit" value="Submit">
+		</form:form>
 
-</div>
-
-
+	</div>
 
 </body>
 </html>
