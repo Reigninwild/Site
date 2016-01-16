@@ -1,5 +1,6 @@
 var url = "http://ec2-54-153-47-168.us-west-1.compute.amazonaws.com:8080";
 
+
 function subscribe() {
 
 	var email = $("#nlt_email").val();
@@ -34,9 +35,6 @@ function subscribe() {
 
 			},
 			error : function(XmlHttpRequest, textStatus, errorThrown) {
-
-				// alert("standings error= " + XmlHttpRequest.responseText);
-
 			}
 		});
 	}
@@ -71,7 +69,6 @@ function add_picture() {
 
 		},
 		error : function(XmlHttpRequest, textStatus, errorThrown) {
-
 		}
 	});
 
@@ -106,7 +103,6 @@ function add_video() {
 
 		},
 		error : function(XmlHttpRequest, textStatus, errorThrown) {
-
 		}
 	});
 
@@ -141,11 +137,9 @@ function getNewsCount(page) {
 		success : function(data) {
 			$("#news").empty();
 			drawNews(data);
-			// draw news
 
 		},
 		error : function(XmlHttpRequest, textStatus, errorThrown) {
-
 		}
 	});
 
@@ -166,9 +160,6 @@ function getLastNews() {
 
 		},
 		error : function(XmlHttpRequest, textStatus, errorThrown) {
-
-			// alert("standings error= " + XmlHttpRequest.responseText);
-
 		}
 	});
 }

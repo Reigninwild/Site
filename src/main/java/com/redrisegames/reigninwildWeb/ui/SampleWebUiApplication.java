@@ -24,6 +24,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -79,15 +80,22 @@ public class SampleWebUiApplication extends SpringBootServletInitializer{
 	        return ht;
 	    }
 	   
-	
 	   
+	    @Value("${spring.datasource.url}")
+	    private String url;
+	    @Value("${spring.datasource.username}")
+	    private String username;
+	    @Value("${spring.datasource.password}")
+	    private String password;
+	    @Value("${spring.datasource.driver-class-name}")
+	    private String driver;
 	   @Bean
 	    public DataSource getDataSource() {
 	        BasicDataSource dataSource = new BasicDataSource();
-	        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-	        dataSource.setUrl("jdbc:mysql://89.108.107.58:3306/bymotors_reigninwild");
-	        dataSource.setUsername("bymotors_manhun");
-	        dataSource.setPassword("laqUqu3PEdeVxaNA672ovsQz7ygAe4gcQF2IAqj61VsjwwoHvC");
+	        dataSource.setDriverClassName(driver);
+	        dataSource.setUrl(url);
+	        dataSource.setUsername(username);
+	        dataSource.setPassword(password);
 	     
 	        return dataSource;
 	    }

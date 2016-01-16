@@ -8,18 +8,11 @@ import com.redrisegames.reigninwildWeb.orm.News;
 
 public interface INewsDao {
     public void save(News news);
-
     public void delete(News news);
-
     public void update(News news);
-    
     public News getTarget(int id);
-    
     public List<News> getNews();
-
     public List<News> getNewCount(int count,int newsOnPage);
-    
     public int getCount();
-    
     public News getLast();
 }

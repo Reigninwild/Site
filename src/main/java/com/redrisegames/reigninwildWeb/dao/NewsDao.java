@@ -50,15 +50,15 @@ public class NewsDao implements INewsDao {
     }
 
     public List<News> getNewCount(int page,int newsOnPage) {
-        List<News> allnews = (List<News>) hibernateTemplate.find("from News n order by n.newsID ASC");
         
-        int size = allnews.size();
-        int first= (size-1) - (page-1)*newsOnPage;
-        int last= ((size-1) - (page-1)*newsOnPage-2 > 0) ? (size-1) - (page-1)*newsOnPage-2 : 0;
+        int size = DataAccessUtils.intResult(hibernateTemplate.find("select max(n.newsID) from News n"));
         
-        List<News> news = new ArrayList<News>();
-        news = allnews.subList(last,first+1);
+        int minValue = DataAccessUtils.intResult(hibernateTemplate.find("select min(n.newsID) from News n"));
         
+        int last= (size-1) - (page-1)*newsOnPage+1;
+        int first= ((size-1) - (page-1)*newsOnPage-2 > minValue) ? (size-1) - (page-1)*newsOnPage-1 : minValue;
+       
+        List<News> news = (List<News>) hibernateTemplate.find("from News n where n.newsID between "+first+" and "+last+"");
         return news;
     }
     

@@ -13,7 +13,7 @@
 <title>Reign in wild: Home</title>
 <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.js"></script>
 <link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
@@ -29,7 +29,7 @@
 			<li class="slide-container">
 				<div class="slide">
 					<img
-						src="${pageContext.request.contextPath}/resources/images/poster.png" />
+						src="${pageContext.request.contextPath}/resources/images/poster.jpg" />
 				</div>
 				<div class="nav">
 					<label for="img-6" class="prev">&#x2039;</label> <label for="img-2"
@@ -65,7 +65,7 @@
 			<li class="slide-container">
 				<div class="slide">
 					<img
-						src="${pageContext.request.contextPath}/resources/images/poster.png" />
+						src="${pageContext.request.contextPath}/resources/images/poster.jpg" />
 				</div>
 				<div class="nav">
 					<label for="img-3" class="prev">&#x2039;</label> <label for="img-5"
@@ -181,19 +181,7 @@
 		</footer>
 
 	</div>
-	<div class="wrapper row5">
-		<div id="copyright" class="clear">
-
-			<p class="fl_left">
-				&copy; <a href="${pageContext.request.contextPath}/home">Reigninwild.com</a>,
-				2015
-			</p>
-
-		</div>
-	</div>
-	<div class="wrapper row0">
-		<footer id="footer" class="clear"></footer>
-	</div>
+		<%@include file="footer.jsp"%>
 
 
 </body>

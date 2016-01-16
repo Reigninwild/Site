@@ -20,9 +20,7 @@ news_id int not null primary key AUTO_INCREMENT,
 news_text varchar(10000),
 news_title varchar(200),
 news_text_ru varchar(10000),
-news_date date not null,
-news_author int,
-constraint fk_news_author foreign key (news_author) references users(user_id) on delete cascade
+news_date date not null
 );
 
 
@@ -34,7 +32,7 @@ email varchar(30) unique
 create table media(
 media_id int not null primary key AUTO_INCREMENT,
 url varchar(200),
-description varchar(100)б
+description varchar(100),
 type varchar(1)
 );
 

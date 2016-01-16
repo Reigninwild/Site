@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Reign in wild: authorization</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
 
 </head>

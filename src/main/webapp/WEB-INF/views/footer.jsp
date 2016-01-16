@@ -11,6 +11,6 @@
 
   </div>
 </div>
-<div class="wrapper row0"><footer id="footer" class="clear"></footer></div>
+<div class="wrapper row0"><div id="footer" class="clear"></div></div>
 </body>
 </html>

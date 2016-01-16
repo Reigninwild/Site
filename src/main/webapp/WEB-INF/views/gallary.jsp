@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Reign in wild: Screenshots</title>
 <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery.min.js"></script>
 <link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${pageContext.request.contextPath}/resources/least.min.css" rel="stylesheet" />
 <script src="${pageContext.request.contextPath}/resources/least.min.js" defer="defer"></script>

@@ -349,7 +349,6 @@ public class MessageController {
     //send email
     @RequestMapping(value = "/sendemail", method = RequestMethod.GET)
     public @ResponseBody String sendEmail(final HttpServletRequest request,@RequestParam("subject") String subject,@RequestParam("content") String content) {
-        
         String result = "0";
         try {
         
@@ -357,6 +356,7 @@ public class MessageController {
                     content);
             result="1";
         } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "Exception: ", ex);
             result="0";
         }
       

@@ -25,7 +25,6 @@ public class Media implements Serializable {
     @Column(name = "url", nullable = true, length = 200)
     private String url;
     /*------------*/
-    /*------------*/
     @Column(name = "description", nullable = true, length = 100)
     private String description;
     /*------------*/

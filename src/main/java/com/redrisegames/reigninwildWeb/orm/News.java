@@ -28,25 +28,17 @@ public class News implements Serializable {
     @SequenceGenerator(name = "my_entity_seq_gen", sequenceName = "catalog_seq")
     private int newsID;
     
-    /*------------*/
     @Column(name = "news_title", nullable = true, length = 200)
     private String newsTitle;
 
-    /*------------*/
     @Column(name = "news_text", nullable = true, length = 1000)
     private String newsText;
-    /*------------*/
+
     @Column(name = "news_text_ru", nullable = true, length = 1000)
     private String newsTextRU;
-    /*------------*/
+
     @Column(name = "news_date", nullable = false)
     private Date newsDate;
-    /*------------*/
-
-    /* foreign key, join to users */
-    @ManyToOne(targetEntity = Users.class)
-    @JoinColumn(name = "news_author")
-    private Users uuser;
 
     public int getNewsID() {
         return newsID;
@@ -72,14 +64,6 @@ public class News implements Serializable {
         this.newsDate = newsDate;
     }
 
-    public Users getUuser() {
-        return uuser;
-    }
-
-    public void setUuser(Users uuser) {
-        this.uuser = uuser;
-    }
-
     public String getNewsTextRU() {
         return newsTextRU;
     }
@@ -95,10 +79,6 @@ public class News implements Serializable {
 	public void setNewsTitle(String newsTitle) {
 		this.newsTitle = newsTitle;
 	}
-
-
-
-
 
 
 }

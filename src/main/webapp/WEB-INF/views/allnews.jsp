@@ -12,7 +12,7 @@
 <title>Reign in wild: News</title>
 <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
 <script src="${pageContext.request.contextPath}/resources/pagination/jquery.twbsPagination.js"></script>
 <link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">

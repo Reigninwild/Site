@@ -5,7 +5,7 @@
 <title>Reign in wild: Contacts</title>
 <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
 <link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 </head>
@@ -27,6 +27,7 @@
 				Facebook:<a href="loh.com">address</a>
 			</div>
 
+<!--  
 			<div class="email">Tell us about found bugs and your
 				suggestions for improving game world and game in general (Don't
 				forget to leave your email).</div>
@@ -49,6 +50,9 @@
 				</div>
 
 			</div>
+			-->
+			
+			
 
 		</div>
 
