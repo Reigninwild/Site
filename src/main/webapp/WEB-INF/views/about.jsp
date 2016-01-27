@@ -11,15 +11,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Reign in wild: About</title>
 <link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+
+		<!-- Main Stylesheet -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+        
+
+		<!-- bootstrap.min -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+		<!-- bootstrap.min -->
+
+        
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/style.css">
+        
+
+		<!-- Twitter Bootstrap -->
+        <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+		<!-- Single Page Nav -->
+
 </head>
 <body>
 
 	<%@include file="topblock.jsp"%>
 
-	<div class="wrapper row3">
-		<div id="container" class="clear">
+		<div class="container">
 			<!-- ################################################################################################ -->
-			<div class="center push80">
+			<div class="row">
+			<div class="col-md-12">
 				<h1 class="shout">Reign in wild: open world survival simulator
 					for iOS and Android</h1>
 				<p class="push10">Reign in wild is a survival simulation game
@@ -45,19 +62,14 @@
 
 				<h1 class="h1head">Multiplayer</h1>
 				<p class="push10">Description here</p>
-
+	</div>
 			</div>
 		</div>
 		<!-- ################################################################################################ -->
-		<div class="clear"></div>
-	</div>
 
-	<div class="wrapper row3">
-		<div id="container" class="clear"></div>
-		<div class="clear"></div>
-	</div>
 
-	<%@include file="footer.jsp"%>
+
+
 
 </body>
 </html>

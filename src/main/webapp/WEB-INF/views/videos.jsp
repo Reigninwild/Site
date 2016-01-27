@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
-    pageEncoding="utf8"%>
+	pageEncoding="utf8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,6 +21,29 @@
 	rel="stylesheet" type="text/css" media="all">
 <link href="${pageContext.request.contextPath}/resources/least.min.css"
 	rel="stylesheet" />
+
+<!-- Main Stylesheet -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/main.css">
+
+
+<!-- bootstrap.min -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<!-- bootstrap.min -->
+
+<!-- Main Stylesheet -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/main.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/style.css">
+
+
+<!-- Twitter Bootstrap -->
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<!-- Single Page Nav -->
 
 
 <script>

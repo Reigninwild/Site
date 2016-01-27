@@ -117,17 +117,25 @@ public class MessageController {
         return "home";
     }
     
+    @RequestMapping("/index")
+    public String index2(RedirectAttributes attributes, Model model) {
+        News news = new News();
+        try {
+            news = newsService.getLast();
+            model.addAttribute("lastNews", news);
+        } catch (IndexOutOfBoundsException e2) {
+            LOG.log(Level.SEVERE, "Exception: ", e2);
+        } catch (HibernateException e) {
+            LOG.log(Level.SEVERE, "Exception: ", e);
+        }
+        return "home";
+    }
+    
     @RequestMapping("/addnews")
     public String news(RedirectAttributes attributes) {
         return "news";
     }
     
-
-    
-    @RequestMapping("/contacts")
-    public String contacts(RedirectAttributes attributes) {
-        return "contacts";
-    }
     
     @RequestMapping("/about")
     public String about(RedirectAttributes attributes) {

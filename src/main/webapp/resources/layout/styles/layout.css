@@ -34,7 +34,7 @@ left:50%;
 
 /* Content Area
 ---------------------------------------------------------------------------------------------------------------*/
-#container{padding:20px 0; color:#c2a67f;}
+#container{padding:20px 0; color:#2e2e2e;}
 
 #container p {
 text-align:left;	
@@ -44,7 +44,7 @@ text-align:left;
 /* Content */
 #container #content{}
 
-.shout{font-size:30px; color:#c2a67f}
+.shout{font-size:30px; color:#2e2e2e}
 .badge{display:inline-block; margin:10px 0 0 0; padding:10px 15px; border:1px solid;}
 
 /* Comments */
@@ -185,7 +185,7 @@ td{border-width:0 1px;}
 
 /* Colours
 ---------------------------------------------------------------------------------------------------------------*/
-body{color:#FFFFFF; background-color:#927d47;}
+body{color:#FFFFFF; background-color:#2e2e2e;}
 
 a{color:#B91E1E;}
 
@@ -198,8 +198,8 @@ label span{color:#FF0000; background-color:inherit;}
 .row1, .row1 a{color:#FFFFFF; background-color:inherit;}
 .row1{}
 .row2, .row2 a{color:#FFFFFF; background-color:#B91E1E;}
-.row3{color:#c2a67f; background-color:#FFFFFF;}
-.row4, .row4 a{color:#c2a67f; background-color:white;}
+.row3{color:#2e2e2e; background-color:#FFFFFF;}
+.row4, .row4 a{color:#2e2e2e; background-color:white;}
 .row4{border-color:#D7D7D7;}
 .row5, .row5 a{color:white; background-color:#c4a881;}
 .row228{padding-top:15px;}
@@ -234,8 +234,8 @@ table a, #comments a{background-color:inherit;}
 
 .learn_more{
 	width:200px;
-color:#c2a67f;
-border:1px solid #c2a67f;
+color:#2e2e2e;
+border:1px solid #2e2e2e;
 position:absolute;
 text-align:center;
 left:50%;
@@ -247,13 +247,13 @@ padding-top:10px;
 padding-bottom:10px;
 }
 .learn_more a{
-color:#c2a67f;
+color:#2e2e2e;
 text-decoration: none;
 }
 .learn_more2{
 width:200px;
-color:#c2a67f;
-border:1px solid #c2a67f;
+color:#2e2e2e;
+border:1px solid #2e2e2e;
 text-align:center;
 float:right;
 margin-left:-100px;
@@ -266,8 +266,8 @@ cursor:pointer;
 
 .learn_more3{
 width:200px;
-color:#c2a67f;
-border:1px solid #c2a67f;
+color:#2e2e2e;
+border:1px solid #2e2e2e;
 text-align:center;
 left:50%;
 margin-top:20px;
@@ -278,7 +278,7 @@ padding-bottom:5px;
 }
 .learn_more2 a{
 
-color:#c2a67f;
+color:#2e2e2e;
 text-decoration: none;
 }
 
@@ -409,14 +409,14 @@ color:red;
 }
 
 .bot_line{
-border-top:5px solid #c2a67f;	
+border-top:5px solid #2e2e2e;	
 margin-top:50px;
 }
 
 #news_title{
 font-size:20px;
 text-align:left;
-color:#c2a67f;
+color:#2e2e2e;
 margin-bottom:20px;
 margin-top:10px;
 }

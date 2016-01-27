@@ -12,10 +12,13 @@
 <title>Reign in wild: News</title>
 <link href="${pageContext.request.contextPath}/resources/style.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
+
+
 <script src="${pageContext.request.contextPath}/resources/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/script.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/pagination/jquery.twbsPagination.js"></script>
-<link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 
 <script>
 		 $(document).ready(
@@ -37,16 +40,21 @@
 
 	<%@include file="topblock.jsp"%>
 
-	<div class="wrapper row3">
-		<div id="container" class="clear">
-			<div id="news">
+
+<br>
+
+
+<div class="container">
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+						<div id="news">
 				<c:forEach items="${allnews}" var="news">
 					<div id='news_title'>${news.newsTitle}</div>
 					<div id='news_text'>${news.newsText}</div>
 					<div id='news_date'>
 						<div class='glyphicon glyphicon-calendar'>
 							<fmt:formatDate value="${news.newsDate}"
-								pattern="yyyy-MM-dd HH:mm:ss" />
+								pattern="yyyy-MM-dd" />
 						</div>
 					</div>
 					<div class='bot_line'></div>
@@ -55,14 +63,22 @@
 				
 			</div>
 			<ul id="pagination-demo" class="pagination-lg"></ul>
+						</div>
+							
+					</div>
+					
 
-		</div>
-
-		<div class="clear"></div>
-	</div>
+			
+			
 
 
-	<%@include file="footer.jsp"%>
+					
+</div>
+
+
+
+
+
 
 
 </body>

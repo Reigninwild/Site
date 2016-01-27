@@ -1,5 +1,9 @@
-var url = "http://ec2-54-153-47-168.us-west-1.compute.amazonaws.com:8080";
+var url = "http://ec2-54-183-198-160.us-west-1.compute.amazonaws.com:8080";
+jQuery(window).load(function(){
 
+	$("#preloader").fadeOut("slow");
+
+});
 
 function subscribe() {
 
@@ -135,6 +139,7 @@ function getNewsCount(page) {
 		contentType : 'application/json',
 		cache : false,
 		success : function(data) {
+			console.log(data);
 			$("#news").empty();
 			drawNews(data);
 
@@ -194,14 +199,17 @@ Date.prototype.yyyymmdd = function() {
 	var yyyy = this.getFullYear().toString();
 	var mm = (this.getMonth() + 1).toString(); // getMonth() is zero-based
 	var dd = this.getDate().toString();
-
-	var hh = this.getHours().toString();
-	var min = this.getMinutes().toString();
-	var ss = this.getSeconds().toString();
+	
 	return yyyy + "-" + (mm[1] ? mm : "0" + mm[0]) + "-"
-			+ (dd[1] ? dd : "0" + dd[0]) + " " + (hh[1] ? hh : "0" + hh[0])
-			+ ":" + (min[1] ? min : "0" + min[0]) + ":"
-			+ (ss[1] ? ss : "0" + ss[0]); // padding
+	+ (dd[1] ? dd : "0" + dd[0]);
+
+	//var hh = this.getHours().toString();
+	//var min = this.getMinutes().toString();
+	//var ss = this.getSeconds().toString();
+	//return yyyy + "-" + (mm[1] ? mm : "0" + mm[0]) + "-"
+	//		+ (dd[1] ? dd : "0" + dd[0]) + " " + (hh[1] ? hh : "0" + hh[0])
+	//		+ ":" + (min[1] ? min : "0" + min[0]) + ":"
+	//		+ (ss[1] ? ss : "0" + ss[0]); 
 };
 
 function send_report() {

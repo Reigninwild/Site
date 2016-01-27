@@ -1,25 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-    pageEncoding="utf8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<link href="${pageContext.request.contextPath}/resources/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-<body>
-	<div class="wrapper">
 
-		<nav id="mainav" class="fl">
-		<ul class="clear">
-			<li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/news">News</a></li>
-			<li><a href="${pageContext.request.contextPath}/videos">Videos</a></li>
-			<li><a href="${pageContext.request.contextPath}/gallary">Screenshots</a></li>
-			<li><a href="${pageContext.request.contextPath}/contacts">Contacts</a></li>
-			</ul>
-		</nav>
+        <div id="navigation" class="navbar-inverse navbar-fixed-top animated-header">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- responsive nav button -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+                    </button>
+					<!-- /responsive nav button -->
+					
+					<!-- logo -->
+					<h1 class="navbar-brand">
+						<a href="${pageContext.request.contextPath}/index">Reign in wild</a>
+					</h1>
+					<!-- /logo -->
+                </div>
 
-	</div>
-</body>
-</html>
-
-
-
+				<!-- main nav -->
+                <nav class="collapse navbar-collapse navbar-right" role="navigation">
+                    <ul  class="nav navbar-nav">
+                        <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath}/news">News</a></li>
+                        <li><a href="${pageContext.request.contextPath}/gallary">Screenshots</a></li>
+                        <li><a href="${pageContext.request.contextPath}/videos">Videos</a></li>
+                        <li><a href="${pageContext.request.contextPath}/home#contact">Contacts</a></li>
+                    </ul>
+                </nav>
+				<!-- /main nav -->
+				
+            </div>
+        </div>
