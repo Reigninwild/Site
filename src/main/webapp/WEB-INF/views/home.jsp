@@ -128,11 +128,11 @@
 					<h3>Contacts</h3>
 					<p>
 						<i class="fa fa-vk"></i><a
-							href="${pageContext.request.contextPath}/index">vk.com/loh</a>
+							href="${pageContext.request.contextPath}/index">vk.com/reigninwild</a>
 					</p>
 					<p>
 						<i class="fa fa-facebook-square"></i><a
-							href="${pageContext.request.contextPath}/index">facebook.com/loh</a>
+							href="${pageContext.request.contextPath}/index">facebook.com/reigninwild</a>
 					</p>
 					<p>
 						<i class="fa fa-envelope"></i>reigninwild@gmail.com
